@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Save Obi 🐈‍⬛💕</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -16,20 +16,22 @@ body {
   overflow-x: hidden; color: #fff;
 }
 
+/* ===== Background ===== */
 .bg-hearts {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
   pointer-events: none; z-index: 0; overflow: hidden;
 }
 .bg-heart {
-  position: absolute; font-size: 20px; opacity: 0.15;
+  position: absolute; font-size: 20px; opacity: 0.12;
   animation: floatUp linear infinite;
 }
 @keyframes floatUp {
-  0% { transform: translateY(110vh) rotate(0deg) scale(1); opacity: 0; }
-  10% { opacity: 0.15; } 90% { opacity: 0.15; }
-  100% { transform: translateY(-10vh) rotate(360deg) scale(0.5); opacity: 0; }
+  0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.12; } 90% { opacity: 0.12; }
+  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
 }
 
+/* ===== Screens ===== */
 .screen {
   display: none; flex-direction: column; align-items: center;
   justify-content: center; min-height: 100vh; padding: 20px;
@@ -37,157 +39,103 @@ body {
 }
 .screen.active { display: flex; }
 
-/* Intro */
-#intro { text-align: center; }
-.gift-box {
-  font-size: 120px; cursor: pointer;
-  animation: giftBounce 1s ease-in-out infinite;
-  transition: transform 0.3s; user-select: none;
-  filter: drop-shadow(0 0 30px rgba(255,100,150,0.5));
+/* ===== Typewriter ===== */
+.story-container {
+  max-width: 520px; width: 100%; text-align: center;
 }
-.gift-box:hover { transform: scale(1.15); }
-.gift-box:active { transform: scale(0.95); }
-@keyframes giftBounce {
-  0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); }
+.story-scene {
+  font-size: 80px; margin-bottom: 20px;
+  filter: drop-shadow(0 0 25px rgba(200,150,255,0.4));
 }
-.intro-text {
-  font-family: 'Dancing Script', cursive; font-size: 2.5em; margin-top: 30px;
-  background: linear-gradient(90deg, #ff6b9d, #ffa8cc, #ff6b9d);
-  background-size: 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  animation: shimmer 3s ease-in-out infinite;
+.story-text {
+  font-family: 'Crimson Text', serif; font-size: 1.25em;
+  line-height: 1.9; opacity: 0.9; min-height: 120px;
+  background: rgba(255,255,255,0.04); backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,100,150,0.15); border-radius: 20px;
+  padding: 25px 30px; text-align: left; position: relative;
 }
-@keyframes shimmer { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-.tap-hint { margin-top: 20px; font-size: 0.9em; opacity: 0.5; animation: pulse 2s ease-in-out infinite; }
-@keyframes pulse { 0%,100% { opacity: 0.3; } 50% { opacity: 0.7; } }
+.story-text .cursor {
+  display: inline-block; width: 2px; height: 1.2em;
+  background: #ff6b9d; margin-left: 2px;
+  animation: blink 0.8s step-end infinite; vertical-align: text-bottom;
+}
+@keyframes blink { 50% { opacity: 0; } }
 
-/* Message */
-#message { text-align: center; }
-.love-letter {
-  max-width: 520px; background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(20px); border: 1px solid rgba(255,100,150,0.2);
-  border-radius: 20px; padding: 40px 30px; animation: fadeInUp 1s ease;
+.story-narrator {
+  font-family: 'Dancing Script', cursive; font-size: 1em;
+  color: #c4a0ff; margin-bottom: 8px; text-align: left;
+  padding-left: 5px;
 }
-.love-letter h2 { font-family: 'Dancing Script', cursive; font-size: 2.2em; color: #ff6b9d; margin-bottom: 20px; }
-.love-letter p { font-size: 1.05em; line-height: 1.8; opacity: 0.9; margin-bottom: 15px; }
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
-.btn {
-  margin-top: 25px; padding: 15px 40px; border: none; border-radius: 50px;
-  font-family: 'Poppins', sans-serif; font-size: 1.1em; font-weight: 600;
+.continue-btn {
+  margin-top: 25px; padding: 14px 40px; border: none; border-radius: 50px;
+  font-family: 'Poppins', sans-serif; font-size: 1em; font-weight: 600;
   cursor: pointer; transition: all 0.3s;
   background: linear-gradient(135deg, #ff6b9d, #c44dff); color: white;
   box-shadow: 0 5px 25px rgba(255,107,157,0.4);
+  opacity: 0; transform: translateY(10px);
 }
-.btn:hover { transform: translateY(-3px); box-shadow: 0 8px 35px rgba(255,107,157,0.6); }
-.btn:active { transform: translateY(0); }
+.continue-btn.visible {
+  opacity: 1; transform: translateY(0);
+  transition: all 0.5s ease;
+}
+.continue-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 35px rgba(255,107,157,0.6); }
+.continue-btn:active { transform: translateY(0); }
 
-/* Obi container */
-.obi-scene {
-  margin: 20px auto; text-align: center;
+/* ===== Chapter title ===== */
+.chapter-title {
+  font-family: 'Dancing Script', cursive; font-size: 2em;
+  color: #ff6b9d; margin-bottom: 5px;
+  animation: fadeInUp 1s ease;
 }
-.obi-cat {
-  font-size: 80px; animation: obiFloat 3s ease-in-out infinite;
-  filter: drop-shadow(0 0 20px rgba(200,150,255,0.4));
+.chapter-sub {
+  font-size: 0.85em; opacity: 0.4; margin-bottom: 20px;
+  animation: fadeInUp 1s ease 0.2s both;
 }
-@keyframes obiFloat {
-  0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); }
-}
-.obi-trapped {
-  font-size: 80px; animation: obiShake 0.5s ease-in-out infinite;
-  filter: drop-shadow(0 0 15px rgba(255,50,50,0.4));
-}
-@keyframes obiShake {
-  0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); }
-}
-.obi-name {
-  font-family: 'Dancing Script', cursive; font-size: 1.4em;
-  color: #c4a0ff; margin-top: 5px;
-}
-.obi-status {
-  font-size: 0.9em; opacity: 0.7; margin-top: 5px;
-}
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-/* Game picker */
-#gamePicker { text-align: center; }
-.game-options { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 15px; max-width: 500px; }
-.game-card {
-  background: rgba(255,255,255,0.06); backdrop-filter: blur(15px);
-  border: 2px solid rgba(255,100,150,0.25); border-radius: 20px;
-  padding: 25px 20px; width: 150px; cursor: pointer; transition: all 0.3s;
-  text-align: center; position: relative;
+/* ===== Progress dots ===== */
+.chapter-dots {
+  display: flex; gap: 8px; justify-content: center; margin: 20px 0;
 }
-.game-card:hover { border-color: #ff6b9d; transform: translateY(-5px); background: rgba(255,100,150,0.1); }
-.game-card .game-icon { font-size: 50px; margin-bottom: 10px; }
-.game-card .game-name { font-size: 0.9em; font-weight: 600; }
-.game-card .game-desc { font-size: 0.75em; opacity: 0.5; margin-top: 5px; }
-.game-card.completed { border-color: #4ade80; background: rgba(74,222,128,0.08); pointer-events: none; }
-.game-card.completed::after {
-  content: '✅'; position: absolute; top: 10px; right: 10px; font-size: 20px;
+.ch-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(255,255,255,0.15); transition: all 0.5s;
 }
+.ch-dot.active { background: #ff6b9d; box-shadow: 0 0 10px rgba(255,107,157,0.5); }
+.ch-dot.done { background: #4ade80; }
 
-/* Rescue progress */
-.rescue-bar {
-  display: flex; gap: 10px; align-items: center; justify-content: center;
-  margin: 15px 0;
-}
-.rescue-step {
-  width: 50px; height: 50px; border-radius: 50%;
-  border: 2px solid rgba(255,100,150,0.3);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 24px; transition: all 0.5s;
-}
-.rescue-step.done {
-  border-color: #4ade80; background: rgba(74,222,128,0.15);
-  animation: matchPop 0.5s ease;
-}
-.rescue-connector {
-  width: 30px; height: 2px; background: rgba(255,255,255,0.15);
-  transition: background 0.5s;
-}
-.rescue-connector.done { background: #4ade80; }
-
-/* Shared game header */
-.game-header { margin-bottom: 15px; text-align: center; }
-.game-header h2 { font-family: 'Dancing Script', cursive; font-size: 2em; color: #ff6b9d; }
+/* ===== Game shared ===== */
+.game-header { margin-bottom: 10px; text-align: center; }
+.game-header h2 { font-family: 'Dancing Script', cursive; font-size: 1.8em; color: #ff6b9d; }
 .game-stats {
-  display: flex; gap: 20px; justify-content: center; margin: 10px 0; font-size: 1.1em;
+  display: flex; gap: 20px; justify-content: center; margin: 10px 0; font-size: 1em;
 }
-.game-stats span { background: rgba(255,255,255,0.1); padding: 8px 18px; border-radius: 20px; }
+.game-stats span { background: rgba(255,255,255,0.1); padding: 6px 16px; border-radius: 20px; }
 
-/* Game story text */
-.game-story {
-  background: rgba(0,0,0,0.3); border-left: 3px solid #c4a0ff;
-  padding: 10px 15px; border-radius: 0 10px 10px 0;
-  margin-bottom: 15px; max-width: 400px; text-align: left;
-  font-size: 0.9em; line-height: 1.5;
-}
-.game-story .obi-says { color: #c4a0ff; font-weight: 600; }
-
-/* ====== GAME 1: Memory ====== */
-#game1 { text-align: center; }
+/* ===== GAME 1: Memory ===== */
 .game-board {
-  display: grid; grid-template-columns: repeat(4,1fr); gap: 10px;
-  max-width: 400px; margin: 0 auto; padding: 10px;
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 8px;
+  max-width: 360px; margin: 0 auto; padding: 5px;
 }
 .card {
   aspect-ratio: 1; background: linear-gradient(135deg,#2d1b4e,#4a2d6e);
-  border: 2px solid rgba(255,100,150,0.3); border-radius: 15px;
+  border: 2px solid rgba(255,100,150,0.3); border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 2em; cursor: pointer; transition: all 0.4s;
+  font-size: 1.8em; cursor: pointer; transition: all 0.4s;
   user-select: none; -webkit-tap-highlight-color: transparent;
 }
-.card:hover { border-color: rgba(255,100,150,0.6); transform: scale(1.03); }
+.card:hover { border-color: rgba(255,100,150,0.6); }
 .card.flipped { background: linear-gradient(135deg,#ff6b9d,#c44dff); transform: rotateY(180deg); border-color: #ff6b9d; }
-.card.matched { background: linear-gradient(135deg,#4ade80,#22d3ee); border-color: #4ade80; animation: matchPop 0.5s ease; }
-@keyframes matchPop { 50% { transform: scale(1.15); } }
+.card.matched { background: linear-gradient(135deg,#4ade80,#22d3ee); border-color: #4ade80; animation: pop 0.5s ease; }
+@keyframes pop { 50% { transform: scale(1.12); } }
 .card .card-back { display: block; } .card .card-front { display: none; }
 .card.flipped .card-back, .card.matched .card-back { display: none; }
 .card.flipped .card-front, .card.matched .card-front { display: block; }
 
-/* ====== GAME 2: Catch Hearts ====== */
-#game2 { text-align: center; }
+/* ===== GAME 2: Catch ===== */
 .catch-area {
-  position: relative; width: 100%; max-width: 400px; height: 500px;
+  position: relative; width: 100%; max-width: 380px; height: 450px;
   background: rgba(255,255,255,0.03); border: 2px solid rgba(255,100,150,0.2);
   border-radius: 20px; overflow: hidden; touch-action: none; margin: 0 auto;
 }
@@ -197,16 +145,15 @@ body {
   transition: left 0.05s linear; user-select: none;
 }
 .falling-item {
-  position: absolute; font-size: 30px; transition: none;
-  user-select: none; pointer-events: none;
+  position: absolute; font-size: 28px; user-select: none; pointer-events: none;
 }
-.catch-score-bar {
+.catch-bar {
   display: flex; justify-content: space-between; align-items: center;
-  max-width: 400px; width: 100%; margin-bottom: 10px;
+  max-width: 380px; width: 100%; margin-bottom: 8px;
 }
-.catch-lives { font-size: 1.3em; }
+.catch-lives { font-size: 1.2em; }
 .progress-bar {
-  width: 180px; height: 12px; background: rgba(255,255,255,0.1);
+  width: 160px; height: 10px; background: rgba(255,255,255,0.1);
   border-radius: 10px; overflow: hidden;
 }
 .progress-fill {
@@ -214,57 +161,55 @@ body {
   border-radius: 10px; transition: width 0.3s;
 }
 
-/* ====== GAME 3: Love Quiz ====== */
-#game3 { text-align: center; }
+/* ===== GAME 3: Quiz ===== */
 .quiz-box {
-  max-width: 450px; width: 100%; background: rgba(255,255,255,0.05);
+  max-width: 440px; width: 100%; background: rgba(255,255,255,0.05);
   backdrop-filter: blur(20px); border: 1px solid rgba(255,100,150,0.2);
-  border-radius: 20px; padding: 30px 25px;
+  border-radius: 20px; padding: 25px 22px;
 }
 .quiz-question {
-  margin-bottom: 25px; line-height: 1.6;
-  font-family: 'Dancing Script', cursive; font-size: 1.6em;
+  margin-bottom: 20px; line-height: 1.6;
+  font-family: 'Dancing Script', cursive; font-size: 1.5em;
 }
-.quiz-options { display: flex; flex-direction: column; gap: 12px; }
+.quiz-options { display: flex; flex-direction: column; gap: 10px; }
 .quiz-opt {
-  padding: 15px 20px; border: 2px solid rgba(255,100,150,0.3);
+  padding: 14px 18px; border: 2px solid rgba(255,100,150,0.3);
   border-radius: 15px; background: rgba(255,255,255,0.05);
   cursor: pointer; transition: all 0.3s; font-family: 'Poppins', sans-serif;
-  font-size: 1em; color: #fff; text-align: left;
+  font-size: 0.95em; color: #fff; text-align: left;
 }
 .quiz-opt:hover { border-color: #ff6b9d; background: rgba(255,100,150,0.1); }
 .quiz-opt.correct { border-color: #4ade80; background: rgba(74,222,128,0.2); }
 .quiz-opt.wrong { border-color: #f87171; background: rgba(248,113,113,0.2); }
-.quiz-progress { margin-top: 20px; opacity: 0.5; }
+.quiz-progress { margin-top: 15px; opacity: 0.5; font-size: 0.9em; }
 
-/* Win screen */
+/* ===== Win ===== */
 #win { text-align: center; }
-.win-content { animation: fadeInUp 1s ease; }
-.win-scene { font-size: 120px; margin-bottom: 10px; }
-.win-obi { display: inline-block; animation: obiCelebrate 1s ease-in-out infinite; }
-@keyframes obiCelebrate {
-  0%,100% { transform: translateY(0) rotate(-5deg); }
-  25% { transform: translateY(-20px) rotate(5deg); }
-  50% { transform: translateY(0) rotate(-3deg); }
-  75% { transform: translateY(-10px) rotate(3deg); }
+.win-content { animation: fadeInUp 1s ease; max-width: 420px; }
+.win-scene { font-size: 100px; margin-bottom: 10px; }
+.win-obi { display: inline-block; animation: obiJump 1s ease-in-out infinite; }
+@keyframes obiJump {
+  0%,100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-25px) rotate(3deg); }
 }
 .win-text {
-  font-family: 'Dancing Script', cursive; font-size: 3em; margin: 20px 0;
+  font-family: 'Dancing Script', cursive; font-size: 2.8em; margin: 15px 0;
   background: linear-gradient(90deg,#ff6b9d,#ffd700,#ff6b9d);
   background-size: 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   animation: shimmer 2s ease-in-out infinite;
 }
-.win-sub { font-size: 1.2em; opacity: 0.8; margin-bottom: 10px; }
+@keyframes shimmer { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 .prize-card {
   background: rgba(255,255,255,0.08); backdrop-filter: blur(20px);
   border: 2px solid rgba(255,215,0,0.4); border-radius: 20px;
-  padding: 30px; margin: 20px auto; max-width: 380px;
+  padding: 25px; margin: 20px auto;
   animation: glowPulse 2s ease-in-out infinite;
 }
 @keyframes glowPulse { 0%,100% { box-shadow: 0 0 20px rgba(255,215,0,0.2); } 50% { box-shadow: 0 0 40px rgba(255,215,0,0.4); } }
-.prize-card h3 { font-size: 1.5em; color: #ffd700; margin-bottom: 10px; }
-.prize-card p { opacity: 0.8; line-height: 1.6; }
+.prize-card h3 { font-size: 1.4em; color: #ffd700; margin-bottom: 10px; }
+.prize-card p { opacity: 0.8; line-height: 1.6; font-size: 0.95em; }
 
+/* ===== Effects ===== */
 .heart-rain {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
   pointer-events: none; z-index: 999; overflow: hidden;
@@ -277,7 +222,6 @@ body {
   0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
   100% { transform: translateY(110vh) rotate(720deg); opacity: 0.3; }
 }
-
 .sparkle {
   position: fixed; pointer-events: none; z-index: 1000;
   font-size: 16px; animation: sparkleFade 1s ease forwards;
@@ -288,126 +232,56 @@ body {
   100% { transform: scale(0) rotate(360deg); opacity: 0; }
 }
 
-.back-btn {
-  position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 8px 16px;
-  border-radius: 20px; cursor: pointer; font-family: 'Poppins'; font-size: 0.85em;
-  z-index: 10; transition: all 0.3s;
-}
-.back-btn:hover { background: rgba(255,255,255,0.2); }
-
-/* Game won overlay */
-.game-won-overlay {
+/* ===== Transition overlay ===== */
+.fade-overlay {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.7); backdrop-filter: blur(10px);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  z-index: 500; animation: fadeInUp 0.5s ease;
+  background: #0a0015; z-index: 800; opacity: 0;
+  pointer-events: none; transition: opacity 0.6s ease;
 }
-.game-won-overlay .obi-freed { font-size: 100px; animation: obiCelebrate 1s ease-in-out infinite; }
-.game-won-overlay .freed-text {
-  font-family: 'Dancing Script', cursive; font-size: 2em; color: #4ade80;
-  margin: 15px 0;
-}
+.fade-overlay.active { opacity: 1; pointer-events: all; }
 
 @media (max-width: 500px) {
-  .gift-box { font-size: 90px; }
-  .intro-text { font-size: 1.8em; }
-  .love-letter { padding: 25px 20px; }
-  .love-letter h2 { font-size: 1.8em; }
-  .game-board { gap: 8px; max-width: 320px; }
-  .card { font-size: 1.5em; border-radius: 10px; }
-  .win-scene { font-size: 80px; }
-  .win-text { font-size: 2.2em; }
-  .game-card { width: 130px; padding: 20px 15px; }
-  .catch-area { height: 400px; }
-  .obi-cat, .obi-trapped { font-size: 60px; }
+  .story-scene { font-size: 60px; }
+  .story-text { font-size: 1.1em; padding: 20px; }
+  .chapter-title { font-size: 1.6em; }
+  .game-board { gap: 6px; max-width: 300px; }
+  .card { font-size: 1.4em; border-radius: 10px; }
+  .catch-area { height: 380px; }
+  .win-scene { font-size: 70px; }
+  .win-text { font-size: 2em; }
 }
 </style>
 </head>
 <body>
 
 <div class="bg-hearts" id="bgHearts"></div>
+<div class="fade-overlay" id="fadeOverlay"></div>
 
-<!-- INTRO -->
-<div class="screen active" id="intro">
-  <div class="gift-box" onclick="openGift()">🎁</div>
-  <div class="intro-text">I have something for you...</div>
-  <div class="tap-hint">tap the gift ✨</div>
-</div>
-
-<!-- MESSAGE -->
-<div class="screen" id="message">
-  <div class="love-letter">
-    <div style="font-size:60px; margin-bottom:15px;">🐈‍⬛</div>
-    <h2>Hey you 💕</h2>
-    <p>I know I messed up. And I know sorry doesn't always feel like enough.</p>
-    <p>But someone needs your help... <strong>Obi</strong> (short for Obsidian) — the cutest black cat in the universe — got trapped by the heartbreak monster! 😱</p>
-    <p>Only you can save him. Win 3 games to break the spell and set Obi free! 🐈‍⬛✨</p>
-    <button class="btn" onclick="showScreen('gamePicker')">Save Obi! 🐾</button>
+<!-- All screens rendered, JS controls flow -->
+<div class="screen active" id="storyScreen">
+  <div class="chapter-dots" id="chapterDots"></div>
+  <div class="story-container">
+    <div class="chapter-title" id="chTitle"></div>
+    <div class="chapter-sub" id="chSub"></div>
+    <div class="story-scene" id="storyScene"></div>
+    <div class="story-narrator" id="storyNarrator"></div>
+    <div class="story-text" id="storyText"></div>
+    <button class="continue-btn" id="continueBtn" onclick="nextBeat()">Continue</button>
   </div>
 </div>
 
-<!-- GAME PICKER -->
-<div class="screen" id="gamePicker">
-  <div class="obi-scene">
-    <div class="obi-trapped" id="obiMain">🐈‍⬛</div>
-    <div class="obi-name">Obi (Obsidian)</div>
-    <div class="obi-status" id="obiStatus">Trapped! Save me! 😿</div>
-  </div>
-
-  <div class="rescue-bar">
-    <div class="rescue-step" id="rs1">🔒</div>
-    <div class="rescue-connector" id="rc1"></div>
-    <div class="rescue-step" id="rs2">🔒</div>
-    <div class="rescue-connector" id="rc2"></div>
-    <div class="rescue-step" id="rs3">🔒</div>
-  </div>
-
-  <div class="game-options">
-    <div class="game-card" id="pick1" onclick="launchGame(1)">
-      <div class="game-icon">🃏</div>
-      <div class="game-name">Memory Match</div>
-      <div class="game-desc">Break the confusion spell</div>
-    </div>
-    <div class="game-card" id="pick2" onclick="launchGame(2)">
-      <div class="game-icon">💘</div>
-      <div class="game-name">Catch Hearts</div>
-      <div class="game-desc">Collect love energy</div>
-    </div>
-    <div class="game-card" id="pick3" onclick="launchGame(3)">
-      <div class="game-icon">💌</div>
-      <div class="game-name">Love Quiz</div>
-      <div class="game-desc">Prove your love wisdom</div>
-    </div>
-  </div>
-</div>
-
-<!-- GAME 1: Memory -->
 <div class="screen" id="game1">
-  <button class="back-btn" onclick="showScreen('gamePicker')">← Back</button>
-  <div class="game-header">
-    <h2>Memory Match 🃏</h2>
-  </div>
-  <div class="game-story">
-    <span class="obi-says">🐈‍⬛ Obi:</span> "The heartbreak monster scrambled my memories! Match all the pairs to undo the confusion spell!"
-  </div>
+  <div class="game-header"><h2>Break the Spell 🃏</h2></div>
   <div class="game-stats">
-    <span>💕 <span id="moves">0</span> moves</span>
+    <span>🐾 <span id="moves">0</span> moves</span>
     <span>⭐ <span id="pairs">0</span>/8</span>
   </div>
   <div class="game-board" id="gameBoard"></div>
 </div>
 
-<!-- GAME 2: Catch Hearts -->
 <div class="screen" id="game2">
-  <button class="back-btn" onclick="endCatchGame(); showScreen('gamePicker')">← Back</button>
-  <div class="game-header">
-    <h2>Catch Hearts 💘</h2>
-  </div>
-  <div class="game-story">
-    <span class="obi-says">🐈‍⬛ Obi:</span> "I need love energy to break free! Catch 20 hearts but watch out for the 💔 — those drain my power!"
-  </div>
-  <div class="catch-score-bar">
+  <div class="game-header"><h2>Catch the Love 💘</h2></div>
+  <div class="catch-bar">
     <div class="catch-lives" id="catchLives">❤️❤️❤️</div>
     <div class="progress-bar"><div class="progress-fill" id="catchProgress" style="width:0%"></div></div>
     <span id="catchCount" style="font-weight:600;">0/20</span>
@@ -417,202 +291,273 @@ body {
   </div>
 </div>
 
-<!-- GAME 3: Love Quiz -->
 <div class="screen" id="game3">
-  <button class="back-btn" onclick="showScreen('gamePicker')">← Back</button>
-  <div class="game-header">
-    <h2>Love Quiz 💌</h2>
-  </div>
-  <div class="game-story">
-    <span class="obi-says">🐈‍⬛ Obi:</span> "The final lock! Answer with your heart — get 4 out of 5 right and I'm free forever!"
-  </div>
-  <div class="quiz-box" id="quizBox">
+  <div class="game-header"><h2>The Final Lock 💌</h2></div>
+  <div class="quiz-box">
     <div class="quiz-question" id="quizQ"></div>
     <div class="quiz-options" id="quizOpts"></div>
     <div class="quiz-progress" id="quizProg"></div>
   </div>
 </div>
 
-<!-- WIN -->
 <div class="screen" id="win">
   <div class="win-content">
     <div class="win-scene">
-      <span class="win-obi">🐈‍⬛</span>
-      <span>💕</span>
-      <span>🧸</span>
+      <span class="win-obi">🐈‍⬛</span> <span>💕</span> <span>🧸</span>
     </div>
     <div class="win-text">I love you beb! 💕</div>
-    <div class="win-sub">You saved Obi! He's free and so grateful 🥹</div>
     <div class="prize-card">
       <h3>🎀 Official Prize Certificate 🎀</h3>
       <p><strong>Obi the black cat</strong> is now yours forever! 🐈‍⬛</p>
-      <p style="margin-top:10px;">Plus: one teddy bear 🧸, unlimited hugs, and a boyfriend who promises to do better 💛</p>
-      <p style="margin-top:15px; font-size:0.9em; opacity:0.6;">Redeemable immediately. No expiry date. Ever.</p>
+      <p style="margin-top:8px;">Plus: one teddy bear 🧸, unlimited hugs, and a boyfriend who promises to do better 💛</p>
+      <p style="margin-top:12px; font-size:0.85em; opacity:0.5;">Redeemable immediately. No expiry date. Ever.</p>
     </div>
-    <button class="btn" style="margin-top:20px;" onclick="resetAll()">Play Again 💕</button>
+    <button class="continue-btn visible" style="margin-top:20px;" onclick="location.reload()">Play Again 💕</button>
   </div>
 </div>
 
 <div class="heart-rain" id="heartRain"></div>
 
 <script>
-// ========== GLOBAL ==========
-let wins = { 1: false, 2: false, 3: false };
-const obiMessages = {
-  0: "Trapped! Save me! 😿",
-  1: "One lock broken! Keep going! 😺",
-  2: "Almost free! One more! 😸",
-  3: "I'M FREE! Thank you! 😻"
-};
+// ==================== STORY ENGINE ====================
 
-function createBgHearts() {
-  const c = document.getElementById('bgHearts');
-  const h = ['💕','💖','💗','💓','💝','💘','♥','✨','🌸','🐾'];
-  for (let i = 0; i < 25; i++) {
+const story = [
+  // Chapter 1: The Beginning
+  {
+    chapter: "Chapter 1", sub: "The Beginning",
+    beats: [
+      { scene: "🌙", narrator: "Narrator", text: "Once upon a time, in a cozy little apartment, there lived a black cat named Obi — short for Obsidian." },
+      { scene: "🐈‍⬛", narrator: "Narrator", text: "Obi had the softest fur, the brightest golden eyes, and a purr that could heal any broken heart." },
+      { scene: "💕", narrator: "Narrator", text: "He belonged to two people who loved each other very much. But one day... something went wrong." },
+      { scene: "⛈️", narrator: "Narrator", text: "A storm rolled in. Not a real storm — the kind that happens between two hearts. Words were said. Silence followed. The apartment grew cold." },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"I could feel it. The warmth was fading. My humans were hurting. And I... I couldn't just sit there.\"" },
+      { scene: "👤", narrator: "Narrator", text: "Obi did what cats do — he went looking for the warmth. He slipped out the window, into the night, searching for a way to fix things." },
+      { scene: "💔", narrator: "Narrator", text: "But the night was darker than he expected. And somewhere in the shadows, the Heartbreak Monster was waiting." },
+      { scene: "😈", narrator: "Heartbreak Monster", text: "\"A little cat trying to save love? How adorable. Let me show you what happens to love in my world.\"" },
+      { scene: "🔒", narrator: "Narrator", text: "Three chains wrapped around Obi. Three locks clicked shut. And just like that... Obi was trapped." },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"Please... if you're reading this... I need your help. Only someone with a loving heart can break these chains. Will you help me?\"" },
+      { btn: "I'll save you, Obi 🐾" },
+    ]
+  },
+  // Chapter 2: First Lock
+  {
+    chapter: "Chapter 2", sub: "The Confusion Spell",
+    beats: [
+      { scene: "🌫️", narrator: "Narrator", text: "The first chain was made of confusion. Scattered memories, mixed-up feelings — everything jumbled together like a puzzle in the dark." },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"The monster scrambled everything! I can't remember what happiness looks like anymore. Can you match the pieces back together?\"" },
+      { scene: "🃏", narrator: "Narrator", text: "To break the first lock, you must find order in the chaos. Match every pair. Restore what was lost." },
+      { game: 1, btn: "Break the spell 🃏" },
+    ]
+  },
+  // Chapter 2.5: After game 1
+  {
+    chapter: "Chapter 2", sub: "The First Chain Falls",
+    beats: [
+      { scene: "✨", narrator: "Narrator", text: "CRACK! The first chain shattered into a thousand sparks of light. The confusion lifted like morning fog." },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"You did it! I can feel the warmth again... just a little. But there are still two more chains. Keep going — please!\"" },
+      { scene: "🔒🔒", narrator: "Narrator", text: "Two locks remain. The Heartbreak Monster growled in the distance. He didn't expect anyone to actually try." },
+      { btn: "I'm not stopping 💪" },
+    ]
+  },
+  // Chapter 3: Second Lock
+  {
+    chapter: "Chapter 3", sub: "The Fading Hearts",
+    beats: [
+      { scene: "💔", narrator: "Narrator", text: "The second chain was made of lost love. Hearts falling from the sky like rain — fading before they touched the ground." },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"The monster is draining all the love from the air! You need to catch it before it disappears. But be careful — the broken hearts will hurt you.\"" },
+      { scene: "💘", narrator: "Narrator", text: "Catch 20 hearts to fill Obi with enough love energy to break the second chain. Don't let the broken ones drag you down." },
+      { game: 2, btn: "Catch the love 💘" },
+    ]
+  },
+  // Chapter 3.5: After game 2
+  {
+    chapter: "Chapter 3", sub: "The Second Chain Falls",
+    beats: [
+      { scene: "💖", narrator: "Narrator", text: "The second chain dissolved into rose petals. Love rushed back into the air like the first breath of spring." },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"I can almost move! One more chain... the strongest one. The monster saved his best trick for last.\"" },
+      { scene: "😈", narrator: "Heartbreak Monster", text: "\"Impressive. But the final lock isn't broken with skill. It's broken with truth. And truth... is the hardest thing of all.\"" },
+      { btn: "I'm not afraid 💕" },
+    ]
+  },
+  // Chapter 4: Final Lock
+  {
+    chapter: "Chapter 4", sub: "The Truth Lock",
+    beats: [
+      { scene: "🔮", narrator: "Narrator", text: "The final chain was made of doubt. It could only be broken by someone who understood what love really means." },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"This is it. Answer from your heart — not your head. The lock can tell the difference.\"" },
+      { scene: "💌", narrator: "Narrator", text: "Five questions. Get four right. Prove that love isn't just a word — it's what you do." },
+      { game: 3, btn: "Open your heart 💌" },
+    ]
+  },
+  // Chapter 5: Freedom
+  {
+    chapter: "Chapter 5", sub: "Freedom",
+    beats: [
+      { scene: "💥", narrator: "Narrator", text: "The final chain didn't just break — it EXPLODED. Light poured out from every crack, flooding the darkness." },
+      { scene: "😈", narrator: "Heartbreak Monster", text: "\"No... NO! You can't— love isn't supposed to be this strong!\"" },
+      { scene: "☀️", narrator: "Narrator", text: "But it was. The monster shrank, smaller and smaller, until he was nothing but a whisper. And then... silence." },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"I'm free. I'm really free! You saved me. You actually saved me!\"" },
+      { scene: "🐈‍⬛💕", narrator: "Narrator", text: "Obi stretched his little legs, shook off the last traces of the chains, and purred louder than he ever had before." },
+      { scene: "🌅", narrator: "Obi", text: "\"You know why I went out into that storm? Because I believe in you two. The love between you is real. It just needed someone to fight for it.\"" },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"So from me — and from someone who loves you more than you know — I have a message...\"" },
+      { final: true },
+    ]
+  },
+];
+
+let currentChapter = 0;
+let currentBeat = 0;
+let isTyping = false;
+let typeTimeout = null;
+let fullText = '';
+
+function initStory() {
+  renderChapterDots();
+  showBeat();
+}
+
+function renderChapterDots() {
+  const dots = document.getElementById('chapterDots');
+  dots.innerHTML = '';
+  for (let i = 0; i < story.length; i++) {
     const d = document.createElement('div');
-    d.className = 'bg-heart';
-    d.textContent = h[Math.floor(Math.random()*h.length)];
-    d.style.left = Math.random()*100+'%';
-    d.style.fontSize = (15+Math.random()*20)+'px';
-    d.style.animationDuration = (8+Math.random()*12)+'s';
-    d.style.animationDelay = Math.random()*10+'s';
-    c.appendChild(d);
+    d.className = 'ch-dot' + (i < currentChapter ? ' done' : '') + (i === currentChapter ? ' active' : '');
+    dots.appendChild(d);
   }
 }
-createBgHearts();
 
-document.addEventListener('click', (e) => {
-  const sp = ['✨','💖','⭐','💕','🐾'];
-  for (let i = 0; i < 3; i++) {
-    const s = document.createElement('div');
-    s.className = 'sparkle';
-    s.textContent = sp[Math.floor(Math.random()*sp.length)];
-    s.style.left = (e.clientX+(Math.random()-0.5)*60)+'px';
-    s.style.top = (e.clientY+(Math.random()-0.5)*60)+'px';
-    document.body.appendChild(s);
-    setTimeout(() => s.remove(), 1000);
+function fadeTransition(cb) {
+  const ov = document.getElementById('fadeOverlay');
+  ov.classList.add('active');
+  setTimeout(() => { cb(); setTimeout(() => ov.classList.remove('active'), 100); }, 600);
+}
+
+function showBeat() {
+  const ch = story[currentChapter];
+  if (!ch) return;
+  const beat = ch.beats[currentBeat];
+  if (!beat) return;
+
+  document.getElementById('chTitle').textContent = ch.chapter;
+  document.getElementById('chSub').textContent = ch.sub;
+  renderChapterDots();
+
+  const btn = document.getElementById('continueBtn');
+  btn.classList.remove('visible');
+
+  // Final beat → go to win
+  if (beat.final) {
+    fadeTransition(() => {
+      showScreen('win');
+      rainHearts();
+    });
+    return;
   }
-});
+
+  // Game launch beat
+  if (beat.game) {
+    document.getElementById('storyScene').textContent = '';
+    document.getElementById('storyNarrator').textContent = '';
+    document.getElementById('storyText').innerHTML = '';
+    btn.textContent = beat.btn;
+    btn.classList.add('visible');
+    btn.onclick = () => {
+      fadeTransition(() => {
+        showScreen('game' + beat.game);
+        if (beat.game === 1) initMemory();
+        if (beat.game === 2) initCatch();
+        if (beat.game === 3) initQuiz();
+      });
+    };
+    return;
+  }
+
+  // Regular story beat
+  if (beat.scene) document.getElementById('storyScene').textContent = beat.scene;
+  if (beat.narrator) document.getElementById('storyNarrator').textContent = beat.narrator === 'Narrator' ? '📖 Narrator' : beat.narrator === 'Obi' ? '🐈‍⬛ Obi' : '😈 ' + beat.narrator;
+
+  if (beat.text) {
+    typeText(beat.text, () => {
+      if (beat.btn) {
+        btn.textContent = beat.btn;
+      } else {
+        btn.textContent = 'Continue ✨';
+      }
+      btn.classList.add('visible');
+      btn.onclick = () => nextBeat();
+    });
+  } else if (beat.btn) {
+    document.getElementById('storyText').innerHTML = '';
+    btn.textContent = beat.btn;
+    btn.classList.add('visible');
+    btn.onclick = () => nextBeat();
+  }
+}
+
+function typeText(text, onDone) {
+  const el = document.getElementById('storyText');
+  el.innerHTML = '<span class="cursor"></span>';
+  fullText = text;
+  isTyping = true;
+  let i = 0;
+
+  function tick() {
+    if (i < text.length) {
+      el.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
+      i++;
+      const delay = text[i-1] === '.' || text[i-1] === '!' || text[i-1] === '?' ? 80 :
+                    text[i-1] === ',' ? 50 : text[i-1] === '"' ? 30 : 25;
+      typeTimeout = setTimeout(tick, delay);
+    } else {
+      isTyping = false;
+      el.innerHTML = text;
+      if (onDone) onDone();
+    }
+  }
+
+  // Tap to skip typewriter
+  el.onclick = () => {
+    if (isTyping) {
+      clearTimeout(typeTimeout);
+      isTyping = false;
+      el.innerHTML = text;
+      if (onDone) onDone();
+    }
+  };
+
+  tick();
+}
+
+function nextBeat() {
+  const ch = story[currentChapter];
+  currentBeat++;
+  if (currentBeat >= ch.beats.length) {
+    currentChapter++;
+    currentBeat = 0;
+    if (currentChapter >= story.length) return;
+    fadeTransition(() => showBeat());
+  } else {
+    showBeat();
+  }
+}
+
+function gameComplete(n) {
+  fadeTransition(() => {
+    showScreen('storyScreen');
+    currentChapter++;
+    currentBeat = 0;
+    showBeat();
+  });
+}
+
+// ==================== SCREENS ====================
 
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  if (id === 'gamePicker') updatePickerState();
 }
 
-function openGift() {
-  const g = document.querySelector('.gift-box');
-  g.style.animation = 'none'; g.style.transition = 'all 0.5s';
-  g.style.transform = 'scale(1.5) rotate(20deg)'; g.style.opacity = '0';
-  setTimeout(() => showScreen('message'), 600);
-}
-
-function updatePickerState() {
-  let count = Object.values(wins).filter(Boolean).length;
-
-  // Update Obi
-  const obi = document.getElementById('obiMain');
-  const status = document.getElementById('obiStatus');
-  if (count === 3) {
-    obi.className = 'obi-cat';
-    status.textContent = obiMessages[3];
-  } else {
-    obi.className = 'obi-trapped';
-    status.textContent = obiMessages[count];
-  }
-
-  // Update rescue bar
-  [1,2,3].forEach((i, idx) => {
-    const step = document.getElementById('rs'+(idx+1));
-    if (wins[i]) {
-      step.textContent = '💖';
-      step.classList.add('done');
-    }
-    if (idx < 2) {
-      const conn = document.getElementById('rc'+(idx+1));
-      if (wins[i]) conn.classList.add('done');
-    }
-  });
-
-  // Update game cards
-  [1,2,3].forEach(i => {
-    const el = document.getElementById('pick'+i);
-    if (wins[i]) el.classList.add('completed');
-  });
-}
-
-function showGameWon(gameNum) {
-  const msgs = {
-    1: "Confusion spell broken! 🧠✨",
-    2: "Love energy collected! 💖⚡",
-    3: "Final lock shattered! 🔓💕"
-  };
-  const overlay = document.createElement('div');
-  overlay.className = 'game-won-overlay';
-  overlay.innerHTML = `
-    <div class="obi-freed">🐈‍⬛</div>
-    <div class="freed-text">${msgs[gameNum]}</div>
-    <p style="opacity:0.7">Obi is one step closer to freedom!</p>
-  `;
-  document.body.appendChild(overlay);
-  setTimeout(() => {
-    overlay.style.transition = 'opacity 0.5s';
-    overlay.style.opacity = '0';
-    setTimeout(() => overlay.remove(), 500);
-  }, 2000);
-}
-
-function gameWon(n) {
-  wins[n] = true;
-  let count = Object.values(wins).filter(Boolean).length;
-  if (count === 3) {
-    setTimeout(() => { showScreen('win'); rainHearts(); }, 1500);
-    showGameWon(n);
-  } else {
-    showGameWon(n);
-    setTimeout(() => showScreen('gamePicker'), 2500);
-  }
-}
-
-function launchGame(n) {
-  if (wins[n]) return;
-  showScreen('game'+n);
-  if (n === 1) initMemory();
-  if (n === 2) initCatch();
-  if (n === 3) initQuiz();
-}
-
-function rainHearts() {
-  const c = document.getElementById('heartRain'); c.innerHTML = '';
-  const h = ['💕','💖','💗','💓','💝','💘','❤️','🌹','✨','🎀','🐈‍⬛','🐾'];
-  for (let i = 0; i < 60; i++) {
-    setTimeout(() => {
-      const d = document.createElement('div');
-      d.className = 'rain-heart';
-      d.textContent = h[Math.floor(Math.random()*h.length)];
-      d.style.left = Math.random()*100+'%';
-      d.style.fontSize = (20+Math.random()*30)+'px';
-      d.style.animationDuration = (2+Math.random()*3)+'s';
-      c.appendChild(d);
-      setTimeout(() => d.remove(), 5000);
-    }, i*80);
-  }
-}
-
-function resetAll() {
-  wins = {1:false,2:false,3:false};
-  document.getElementById('heartRain').innerHTML = '';
-  [1,2,3].forEach(i => {
-    document.getElementById('pick'+i).classList.remove('completed');
-    document.getElementById('rs'+i).textContent = '🔒';
-    document.getElementById('rs'+i).classList.remove('done');
-  });
-  document.getElementById('rc1').classList.remove('done');
-  document.getElementById('rc2').classList.remove('done');
-  showScreen('gamePicker');
-}
-
-// ========== GAME 1: MEMORY ==========
+// ==================== GAME 1: MEMORY ====================
 const emojis = ['💕','💖','💗','💓','💘','💝','🌹','💌'];
 let memFlipped=[], memMatched=0, memMoves=0, memLocked=false;
 
@@ -623,7 +568,7 @@ function initMemory() {
   const deck=[...emojis,...emojis];
   for(let i=deck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[deck[i],deck[j]]=[deck[j],deck[i]];}
   const board=document.getElementById('gameBoard'); board.innerHTML='';
-  deck.forEach((e,i) => {
+  deck.forEach((e) => {
     const c=document.createElement('div'); c.className='card';
     c.innerHTML=`<span class="card-back">🐾</span><span class="card-front">${e}</span>`;
     c.dataset.emoji=e;
@@ -643,7 +588,7 @@ function flipCard(card) {
         memFlipped[0].classList.add('matched'); memFlipped[1].classList.add('matched');
         memMatched++; document.getElementById('pairs').textContent=memMatched;
         memFlipped=[]; memLocked=false;
-        if(memMatched===8) gameWon(1);
+        if(memMatched===8) setTimeout(()=>gameComplete(1),800);
       },500);
     } else {
       setTimeout(()=>{
@@ -654,7 +599,7 @@ function flipCard(card) {
   }
 }
 
-// ========== GAME 2: CATCH HEARTS ==========
+// ==================== GAME 2: CATCH ====================
 let catchInterval, catchLives, catchCount, catchActive=false;
 
 function initCatch() {
@@ -675,8 +620,7 @@ function initCatch() {
 function moveBasket(clientX, area) {
   const rect = area.getBoundingClientRect();
   let x = clientX - rect.left - 35;
-  x = Math.max(0, Math.min(x, area.offsetWidth-70));
-  document.getElementById('basket').style.left = x+'px';
+  document.getElementById('basket').style.left = Math.max(0, Math.min(x, area.offsetWidth-70))+'px';
 }
 
 function spawnItem(area) {
@@ -692,95 +636,119 @@ function spawnItem(area) {
   area.appendChild(item);
   let y = -40;
   const speed = 2 + Math.random()*2;
-  function fall() {
+  (function fall() {
     if(!catchActive) { item.remove(); return; }
-    y += speed;
-    item.style.top = y+'px';
-    const basket = document.getElementById('basket');
-    const bx = parseFloat(basket.style.left);
+    y += speed; item.style.top = y+'px';
+    const bx = parseFloat(document.getElementById('basket').style.left);
     const ix = parseFloat(item.style.left);
-    if(y > area.offsetHeight - 60 && y < area.offsetHeight - 20 && Math.abs(ix - bx) < 55) {
+    if(y > area.offsetHeight-60 && y < area.offsetHeight-20 && Math.abs(ix-bx)<55) {
       item.remove();
-      if(item.dataset.good === '1') {
+      if(item.dataset.good==='1') {
         catchCount++;
-        document.getElementById('catchCount').textContent = catchCount+'/20';
-        document.getElementById('catchProgress').style.width = (catchCount/20*100)+'%';
-        if(catchCount >= 20) { endCatchGame(); gameWon(2); }
-      } else {
-        catchLives--;
-        updateCatchLives();
-        if(catchLives <= 0) { endCatchGame(); initCatch(); }
-      }
+        document.getElementById('catchCount').textContent=catchCount+'/20';
+        document.getElementById('catchProgress').style.width=(catchCount/20*100)+'%';
+        if(catchCount>=20) { endCatch(); setTimeout(()=>gameComplete(2),500); }
+      } else { catchLives--; updLives(); if(catchLives<=0){endCatch();initCatch();} }
       return;
     }
-    if(y > area.offsetHeight) {
+    if(y>area.offsetHeight) {
       item.remove();
-      if(item.dataset.good === '1') {
-        catchLives--;
-        updateCatchLives();
-        if(catchLives <= 0) { endCatchGame(); initCatch(); }
-      }
+      if(item.dataset.good==='1') { catchLives--; updLives(); if(catchLives<=0){endCatch();initCatch();} }
       return;
     }
     requestAnimationFrame(fall);
-  }
-  requestAnimationFrame(fall);
+  })();
 }
 
-function updateCatchLives() {
-  document.getElementById('catchLives').textContent = '❤️'.repeat(Math.max(0,catchLives)) + '🤍'.repeat(Math.max(0,3-catchLives));
+function updLives() {
+  document.getElementById('catchLives').textContent='❤️'.repeat(Math.max(0,catchLives))+'🤍'.repeat(Math.max(0,3-catchLives));
 }
-
-function endCatchGame() {
-  catchActive = false;
-  if(catchInterval) clearInterval(catchInterval);
+function endCatch() {
+  catchActive=false;
+  if(catchInterval)clearInterval(catchInterval);
   document.getElementById('catchArea').querySelectorAll('.falling-item').forEach(e=>e.remove());
 }
 
-// ========== GAME 3: LOVE QUIZ ==========
+// ==================== GAME 3: QUIZ ====================
 const quizData = [
   { q: "What's the best way to say sorry?", opts: ["Text 'my bad' 💀","Buy flowers and say it in person 💐","Blame the dog 🐕","Build her a whole website 🔥"], correct: 3 },
   { q: "When she says 'I'm fine', she means...", opts: ["She's totally fine ✅","She is NOT fine, go fix it NOW 🚨","Time to play video games 🎮","Ask again in 3 hours ⏰"], correct: 1 },
   { q: "The best gift for your girl is...", opts: ["Gift card 💳","Your time and attention 💕","A meme 😂","Literally anything from Shein 📦"], correct: 1 },
   { q: "How do you win an argument?", opts: ["Raise your voice louder 📢","Present a PowerPoint 📊","You don't — you hug her 🤗","Google 'how to win argument with gf'"], correct: 2 },
-  { q: "What would Obi say about love?", opts: ["Meow 🐱","Love is like a warm sunspot — find it and never leave 🌞","Knock things off tables as a love language 😼","All of the above 🐈‍⬛"], correct: 3 },
+  { q: "What would Obi say about love?", opts: ["Meow 🐱","Love is warm like a sunspot 🌞","Knock things off tables as a love language 😼","All of the above 🐈‍⬛"], correct: 3 },
 ];
 let quizIdx=0, quizScore=0;
 
-function initQuiz() {
-  quizIdx=0; quizScore=0;
-  showQuizQuestion();
-}
+function initQuiz() { quizIdx=0; quizScore=0; showQ(); }
 
-function showQuizQuestion() {
-  if(quizIdx >= quizData.length) {
-    if(quizScore >= 4) { gameWon(3); }
-    else { quizIdx=0; quizScore=0; showQuizQuestion(); }
+function showQ() {
+  if(quizIdx>=quizData.length) {
+    if(quizScore>=4) setTimeout(()=>gameComplete(3),500);
+    else { quizIdx=0; quizScore=0; showQ(); }
     return;
   }
-  const q = quizData[quizIdx];
-  document.getElementById('quizQ').textContent = q.q;
-  document.getElementById('quizProg').textContent = `Question ${quizIdx+1}/${quizData.length} • Score: ${quizScore} 🐈‍⬛`;
-  const opts = document.getElementById('quizOpts'); opts.innerHTML = '';
-  q.opts.forEach((o, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'quiz-opt';
-    btn.textContent = o;
-    btn.onclick = () => answerQuiz(i, q.correct, btn);
+  const q=quizData[quizIdx];
+  document.getElementById('quizQ').textContent=q.q;
+  document.getElementById('quizProg').textContent=`${quizIdx+1}/${quizData.length} • Score: ${quizScore} 🐈‍⬛`;
+  const opts=document.getElementById('quizOpts'); opts.innerHTML='';
+  q.opts.forEach((o,i) => {
+    const btn=document.createElement('button'); btn.className='quiz-opt'; btn.textContent=o;
+    btn.onclick=()=>{
+      document.querySelectorAll('.quiz-opt').forEach((b,j)=>{
+        b.style.pointerEvents='none';
+        if(j===q.correct) b.classList.add('correct');
+        if(j===i&&i!==q.correct) b.classList.add('wrong');
+      });
+      if(i===q.correct) quizScore++;
+      setTimeout(()=>{quizIdx++;showQ();},1200);
+    };
     opts.appendChild(btn);
   });
 }
 
-function answerQuiz(picked, correct) {
-  const opts = document.querySelectorAll('.quiz-opt');
-  opts.forEach((o,i) => {
-    o.style.pointerEvents = 'none';
-    if(i === correct) o.classList.add('correct');
-    if(i === picked && picked !== correct) o.classList.add('wrong');
-  });
-  if(picked === correct) quizScore++;
-  setTimeout(() => { quizIdx++; showQuizQuestion(); }, 1200);
+// ==================== EFFECTS ====================
+function rainHearts() {
+  const c=document.getElementById('heartRain'); c.innerHTML='';
+  const h=['💕','💖','💗','💓','💝','💘','❤️','🌹','✨','🐈‍⬛','🐾'];
+  for(let i=0;i<60;i++){
+    setTimeout(()=>{
+      const d=document.createElement('div'); d.className='rain-heart';
+      d.textContent=h[Math.floor(Math.random()*h.length)];
+      d.style.left=Math.random()*100+'%';
+      d.style.fontSize=(20+Math.random()*30)+'px';
+      d.style.animationDuration=(2+Math.random()*3)+'s';
+      c.appendChild(d); setTimeout(()=>d.remove(),5000);
+    },i*80);
+  }
 }
+
+(function(){
+  const c=document.getElementById('bgHearts');
+  const h=['💕','💖','💗','🐾','✨','🌸'];
+  for(let i=0;i<20;i++){
+    const d=document.createElement('div'); d.className='bg-heart';
+    d.textContent=h[Math.floor(Math.random()*h.length)];
+    d.style.left=Math.random()*100+'%';
+    d.style.fontSize=(14+Math.random()*18)+'px';
+    d.style.animationDuration=(8+Math.random()*12)+'s';
+    d.style.animationDelay=Math.random()*10+'s';
+    c.appendChild(d);
+  }
+})();
+
+document.addEventListener('click',e=>{
+  const sp=['✨','💖','🐾'];
+  for(let i=0;i<2;i++){
+    const s=document.createElement('div'); s.className='sparkle';
+    s.textContent=sp[Math.floor(Math.random()*sp.length)];
+    s.style.left=(e.clientX+(Math.random()-0.5)*50)+'px';
+    s.style.top=(e.clientY+(Math.random()-0.5)*50)+'px';
+    document.body.appendChild(s); setTimeout(()=>s.remove(),1000);
+  }
+});
+
+// Start
+initStory();
 </script>
 </body>
 </html>
