@@ -16,7 +16,6 @@ body {
   overflow-x: hidden; color: #fff;
 }
 
-/* ===== Background ===== */
 .bg-hearts {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
   pointer-events: none; z-index: 0; overflow: hidden;
@@ -31,7 +30,6 @@ body {
   100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
 }
 
-/* ===== Screens ===== */
 .screen {
   display: none; flex-direction: column; align-items: center;
   justify-content: center; min-height: 100vh; padding: 20px;
@@ -39,20 +37,20 @@ body {
 }
 .screen.active { display: flex; }
 
-/* ===== Typewriter ===== */
-.story-container {
-  max-width: 520px; width: 100%; text-align: center;
-}
+/* Typewriter & Story */
+.story-container { max-width: 520px; width: 100%; text-align: center; }
 .story-scene {
   font-size: 80px; margin-bottom: 20px;
   filter: drop-shadow(0 0 25px rgba(200,150,255,0.4));
+  transition: all 0.3s;
 }
 .story-text {
   font-family: 'Crimson Text', serif; font-size: 1.25em;
-  line-height: 1.9; opacity: 0.9; min-height: 120px;
+  line-height: 1.9; opacity: 0.9; min-height: 100px;
   background: rgba(255,255,255,0.04); backdrop-filter: blur(15px);
   border: 1px solid rgba(255,100,150,0.15); border-radius: 20px;
   padding: 25px 30px; text-align: left; position: relative;
+  cursor: pointer;
 }
 .story-text .cursor {
   display: inline-block; width: 2px; height: 1.2em;
@@ -60,33 +58,13 @@ body {
   animation: blink 0.8s step-end infinite; vertical-align: text-bottom;
 }
 @keyframes blink { 50% { opacity: 0; } }
-
 .story-narrator {
   font-family: 'Dancing Script', cursive; font-size: 1em;
-  color: #c4a0ff; margin-bottom: 8px; text-align: left;
-  padding-left: 5px;
+  color: #c4a0ff; margin-bottom: 8px; text-align: left; padding-left: 5px;
 }
-
-.continue-btn {
-  margin-top: 25px; padding: 14px 40px; border: none; border-radius: 50px;
-  font-family: 'Poppins', sans-serif; font-size: 1em; font-weight: 600;
-  cursor: pointer; transition: all 0.3s;
-  background: linear-gradient(135deg, #ff6b9d, #c44dff); color: white;
-  box-shadow: 0 5px 25px rgba(255,107,157,0.4);
-  opacity: 0; transform: translateY(10px);
-}
-.continue-btn.visible {
-  opacity: 1; transform: translateY(0);
-  transition: all 0.5s ease;
-}
-.continue-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 35px rgba(255,107,157,0.6); }
-.continue-btn:active { transform: translateY(0); }
-
-/* ===== Chapter title ===== */
 .chapter-title {
   font-family: 'Dancing Script', cursive; font-size: 2em;
-  color: #ff6b9d; margin-bottom: 5px;
-  animation: fadeInUp 1s ease;
+  color: #ff6b9d; margin-bottom: 5px; animation: fadeInUp 1s ease;
 }
 .chapter-sub {
   font-size: 0.85em; opacity: 0.4; margin-bottom: 20px;
@@ -94,10 +72,18 @@ body {
 }
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-/* ===== Progress dots ===== */
-.chapter-dots {
-  display: flex; gap: 8px; justify-content: center; margin: 20px 0;
+.continue-btn {
+  margin-top: 25px; padding: 14px 40px; border: none; border-radius: 50px;
+  font-family: 'Poppins', sans-serif; font-size: 1em; font-weight: 600;
+  cursor: pointer; transition: all 0.3s;
+  background: linear-gradient(135deg, #ff6b9d, #c44dff); color: white;
+  box-shadow: 0 5px 25px rgba(255,107,157,0.4);
+  opacity: 0; transform: translateY(10px); pointer-events: none;
 }
+.continue-btn.visible { opacity: 1; transform: translateY(0); pointer-events: all; transition: all 0.5s ease; }
+.continue-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 35px rgba(255,107,157,0.6); }
+
+.chapter-dots { display: flex; gap: 8px; justify-content: center; margin: 20px 0; }
 .ch-dot {
   width: 10px; height: 10px; border-radius: 50%;
   background: rgba(255,255,255,0.15); transition: all 0.5s;
@@ -105,7 +91,7 @@ body {
 .ch-dot.active { background: #ff6b9d; box-shadow: 0 0 10px rgba(255,107,157,0.5); }
 .ch-dot.done { background: #4ade80; }
 
-/* ===== Game shared ===== */
+/* Game shared */
 .game-header { margin-bottom: 10px; text-align: center; }
 .game-header h2 { font-family: 'Dancing Script', cursive; font-size: 1.8em; color: #ff6b9d; }
 .game-stats {
@@ -133,32 +119,64 @@ body {
 .card.flipped .card-back, .card.matched .card-back { display: none; }
 .card.flipped .card-front, .card.matched .card-front { display: block; }
 
-/* ===== GAME 2: Catch ===== */
-.catch-area {
-  position: relative; width: 100%; max-width: 380px; height: 450px;
-  background: rgba(255,255,255,0.03); border: 2px solid rgba(255,100,150,0.2);
-  border-radius: 20px; overflow: hidden; touch-action: none; margin: 0 auto;
+/* ===== GAME 2: Flower Garden ===== */
+.garden-container { text-align: center; width: 100%; max-width: 400px; }
+.garden-bouquet {
+  display: flex; justify-content: center; gap: 5px; margin-bottom: 10px;
+  min-height: 50px; flex-wrap: wrap;
 }
-.basket {
-  position: absolute; bottom: 10px; width: 70px; height: 45px;
-  font-size: 40px; text-align: center; line-height: 45px;
-  transition: left 0.05s linear; user-select: none;
+.bouquet-flower {
+  font-size: 28px; animation: bouquetPop 0.4s ease;
 }
-.falling-item {
-  position: absolute; font-size: 28px; user-select: none; pointer-events: none;
+@keyframes bouquetPop { 0% { transform: scale(0) rotate(-180deg); } 100% { transform: scale(1) rotate(0deg); } }
+.garden-progress {
+  font-size: 0.95em; margin-bottom: 12px; opacity: 0.7;
 }
-.catch-bar {
-  display: flex; justify-content: space-between; align-items: center;
-  max-width: 380px; width: 100%; margin-bottom: 8px;
+.garden {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+  max-width: 380px; margin: 0 auto;
 }
-.catch-lives { font-size: 1.2em; }
-.progress-bar {
-  width: 160px; height: 10px; background: rgba(255,255,255,0.1);
-  border-radius: 10px; overflow: hidden;
+.garden-spot {
+  aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle, rgba(74,40,100,0.6) 0%, rgba(30,15,50,0.3) 70%);
+  border: 2px solid rgba(100,200,100,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.2em; cursor: pointer; transition: all 0.3s;
+  user-select: none; -webkit-tap-highlight-color: transparent;
+  position: relative; overflow: hidden;
 }
-.progress-fill {
-  height: 100%; background: linear-gradient(90deg, #ff6b9d, #ffd700);
-  border-radius: 10px; transition: width 0.3s;
+.garden-spot::before {
+  content: ''; position: absolute; width: 100%; height: 100%;
+  background: radial-gradient(circle, rgba(255,200,100,0.15), transparent 70%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.garden-spot:hover::before { opacity: 1; }
+.garden-spot.empty {
+  opacity: 0.3; font-size: 1em; cursor: default;
+}
+.garden-spot.blooming {
+  animation: bloom 0.5s ease; border-color: rgba(255,150,200,0.4);
+}
+@keyframes bloom {
+  0% { transform: scale(0.3) rotate(-90deg); opacity: 0; }
+  60% { transform: scale(1.2) rotate(10deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.garden-spot.picked {
+  animation: pickFlower 0.4s ease forwards;
+}
+@keyframes pickFlower {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3) translateY(-15px); }
+  100% { transform: scale(0); opacity: 0; }
+}
+.garden-spot .sparkle-burst {
+  position: absolute; font-size: 14px; animation: burstOut 0.6s ease forwards;
+  pointer-events: none;
+}
+@keyframes burstOut {
+  0% { transform: translate(0,0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
 }
 
 /* ===== GAME 3: Quiz ===== */
@@ -198,7 +216,7 @@ body {
   background-size: 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   animation: shimmer 2s ease-in-out infinite;
 }
-@keyframes shimmer { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+.win-sub { font-size: 1.1em; opacity: 0.8; margin-bottom: 10px; }
 .prize-card {
   background: rgba(255,255,255,0.08); backdrop-filter: blur(20px);
   border: 2px solid rgba(255,215,0,0.4); border-radius: 20px;
@@ -208,8 +226,18 @@ body {
 @keyframes glowPulse { 0%,100% { box-shadow: 0 0 20px rgba(255,215,0,0.2); } 50% { box-shadow: 0 0 40px rgba(255,215,0,0.4); } }
 .prize-card h3 { font-size: 1.4em; color: #ffd700; margin-bottom: 10px; }
 .prize-card p { opacity: 0.8; line-height: 1.6; font-size: 0.95em; }
+.prize-bouquet {
+  display: flex; justify-content: center; gap: 3px; margin: 15px 0;
+  flex-wrap: wrap;
+}
+.prize-bouquet span { font-size: 28px; animation: gentleSway 2s ease-in-out infinite; }
+.prize-bouquet span:nth-child(2n) { animation-delay: 0.3s; }
+.prize-bouquet span:nth-child(3n) { animation-delay: 0.6s; }
+@keyframes gentleSway {
+  0%,100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); }
+}
 
-/* ===== Effects ===== */
+/* Effects */
 .heart-rain {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
   pointer-events: none; z-index: 999; overflow: hidden;
@@ -231,8 +259,6 @@ body {
   50% { transform: scale(1.5) rotate(180deg); opacity: 1; }
   100% { transform: scale(0) rotate(360deg); opacity: 0; }
 }
-
-/* ===== Transition overlay ===== */
 .fade-overlay {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
   background: #0a0015; z-index: 800; opacity: 0;
@@ -246,7 +272,8 @@ body {
   .chapter-title { font-size: 1.6em; }
   .game-board { gap: 6px; max-width: 300px; }
   .card { font-size: 1.4em; border-radius: 10px; }
-  .catch-area { height: 380px; }
+  .garden { gap: 6px; max-width: 320px; }
+  .garden-spot { font-size: 1.8em; }
   .win-scene { font-size: 70px; }
   .win-text { font-size: 2em; }
 }
@@ -257,7 +284,6 @@ body {
 <div class="bg-hearts" id="bgHearts"></div>
 <div class="fade-overlay" id="fadeOverlay"></div>
 
-<!-- All screens rendered, JS controls flow -->
 <div class="screen active" id="storyScreen">
   <div class="chapter-dots" id="chapterDots"></div>
   <div class="story-container">
@@ -266,7 +292,7 @@ body {
     <div class="story-scene" id="storyScene"></div>
     <div class="story-narrator" id="storyNarrator"></div>
     <div class="story-text" id="storyText"></div>
-    <button class="continue-btn" id="continueBtn" onclick="nextBeat()">Continue</button>
+    <button class="continue-btn" id="continueBtn">Continue</button>
   </div>
 </div>
 
@@ -280,14 +306,11 @@ body {
 </div>
 
 <div class="screen" id="game2">
-  <div class="game-header"><h2>Catch the Love 💘</h2></div>
-  <div class="catch-bar">
-    <div class="catch-lives" id="catchLives">❤️❤️❤️</div>
-    <div class="progress-bar"><div class="progress-fill" id="catchProgress" style="width:0%"></div></div>
-    <span id="catchCount" style="font-weight:600;">0/20</span>
-  </div>
-  <div class="catch-area" id="catchArea">
-    <div class="basket" id="basket">🧺</div>
+  <div class="game-header"><h2>Pick the Flowers 🌸</h2></div>
+  <div class="garden-container">
+    <div class="garden-bouquet" id="bouquet"></div>
+    <div class="garden-progress" id="gardenProg">Pick 12 flowers for Obi's freedom bouquet! 💐</div>
+    <div class="garden" id="garden"></div>
   </div>
 </div>
 
@@ -306,10 +329,13 @@ body {
       <span class="win-obi">🐈‍⬛</span> <span>💕</span> <span>🧸</span>
     </div>
     <div class="win-text">I love you beb! 💕</div>
+    <div class="win-sub">You saved Obi! He's free forever 🥹</div>
+    <div class="prize-bouquet" id="prizeBouquet"></div>
     <div class="prize-card">
       <h3>🎀 Official Prize Certificate 🎀</h3>
       <p><strong>Obi the black cat</strong> is now yours forever! 🐈‍⬛</p>
-      <p style="margin-top:8px;">Plus: one teddy bear 🧸, unlimited hugs, and a boyfriend who promises to do better 💛</p>
+      <p style="margin-top:8px;">Your bouquet of flowers, picked with love 💐</p>
+      <p style="margin-top:8px;">One teddy bear 🧸, unlimited hugs, and a boyfriend who promises to do better 💛</p>
       <p style="margin-top:12px; font-size:0.85em; opacity:0.5;">Redeemable immediately. No expiry date. Ever.</p>
     </div>
     <button class="continue-btn visible" style="margin-top:20px;" onclick="location.reload()">Play Again 💕</button>
@@ -319,117 +345,112 @@ body {
 <div class="heart-rain" id="heartRain"></div>
 
 <script>
-// ==================== STORY ENGINE ====================
-
+// ==================== STORY ====================
 const story = [
-  // Chapter 1: The Beginning
   {
     chapter: "Chapter 1", sub: "The Beginning",
     beats: [
-      { scene: "🌙", narrator: "Narrator", text: "Once upon a time, in a cozy little apartment, there lived a black cat named Obi — short for Obsidian." },
-      { scene: "🐈‍⬛", narrator: "Narrator", text: "Obi had the softest fur, the brightest golden eyes, and a purr that could heal any broken heart." },
-      { scene: "💕", narrator: "Narrator", text: "He belonged to two people who loved each other very much. But one day... something went wrong." },
-      { scene: "⛈️", narrator: "Narrator", text: "A storm rolled in. Not a real storm — the kind that happens between two hearts. Words were said. Silence followed. The apartment grew cold." },
-      { scene: "🐈‍⬛", narrator: "Obi", text: "\"I could feel it. The warmth was fading. My humans were hurting. And I... I couldn't just sit there.\"" },
-      { scene: "👤", narrator: "Narrator", text: "Obi did what cats do — he went looking for the warmth. He slipped out the window, into the night, searching for a way to fix things." },
-      { scene: "💔", narrator: "Narrator", text: "But the night was darker than he expected. And somewhere in the shadows, the Heartbreak Monster was waiting." },
-      { scene: "😈", narrator: "Heartbreak Monster", text: "\"A little cat trying to save love? How adorable. Let me show you what happens to love in my world.\"" },
-      { scene: "🔒", narrator: "Narrator", text: "Three chains wrapped around Obi. Three locks clicked shut. And just like that... Obi was trapped." },
-      { scene: "🐈‍⬛", narrator: "Obi", text: "\"Please... if you're reading this... I need your help. Only someone with a loving heart can break these chains. Will you help me?\"" },
+      { scene: "🌙", narrator: "Narrator", text: "Once upon a time, in a cozy little apartment filled with warm light and the smell of coffee, there lived a black cat named Obi." },
+      { scene: "🐈‍⬛", narrator: "Narrator", text: "Obi — short for Obsidian — had fur as dark as midnight, golden eyes like tiny suns, and a purr so deep it could make the whole couch vibrate." },
+      { scene: "💕", narrator: "Narrator", text: "He belonged to two people who loved each other very much. He'd curl up between them at night, one paw on each, like a little furry bridge connecting their hearts." },
+      { scene: "⛈️", narrator: "Narrator", text: "But even the strongest love has storms. One evening, the air changed. Words that shouldn't have been said echoed through the rooms. Doors closed. Silence crept in like fog." },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"I felt it before they did. The warmth between them — the thing I slept on every night — it was flickering. Like a candle in a draft.\"" },
+      { scene: "🌃", narrator: "Narrator", text: "While his humans sat in separate rooms, Obi made a decision. He slipped through the cracked window, padded across the moonlit rooftop, and disappeared into the night." },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"I had to find it. The warmth. If it wasn't inside anymore, maybe I could bring it back from outside. Cats always find what they're looking for... right?\"" },
+      { scene: "🌑", narrator: "Narrator", text: "But the city at night is a different world. The streets twisted. The shadows grew longer. And somewhere in the darkest alley, something was waiting." },
+      { scene: "😈", narrator: "Heartbreak Monster", text: "\"Well, well... a little black cat, wandering alone. Looking for love? How... delicious. Let me show you what happens to love in MY world.\"" },
+      { scene: "⛓️", narrator: "Narrator", text: "Three chains erupted from the darkness. One wrapped around Obi's mind — confusion. One around his heart — coldness. One around his soul — doubt. Three locks clicked shut." },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"I can't move... I can't think... everything is getting so cold. Please... if anyone can hear me... I went out there for love. Don't let it end like this.\"" },
       { btn: "I'll save you, Obi 🐾" },
     ]
   },
-  // Chapter 2: First Lock
   {
     chapter: "Chapter 2", sub: "The Confusion Spell",
     beats: [
-      { scene: "🌫️", narrator: "Narrator", text: "The first chain was made of confusion. Scattered memories, mixed-up feelings — everything jumbled together like a puzzle in the dark." },
-      { scene: "🐈‍⬛", narrator: "Obi", text: "\"The monster scrambled everything! I can't remember what happiness looks like anymore. Can you match the pieces back together?\"" },
-      { scene: "🃏", narrator: "Narrator", text: "To break the first lock, you must find order in the chaos. Match every pair. Restore what was lost." },
-      { game: 1, btn: "Break the spell 🃏" },
+      { scene: "🌫️", narrator: "Narrator", text: "The first chain was woven from confusion — every happy memory Obi ever had was scrambled, turned inside out, made unrecognizable." },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"Everything is mixed up... I remember the sound of laughter but I can't remember whose. I remember the warmth but not where it came from. Please... put the pieces back together.\"" },
+      { scene: "🧩", narrator: "Narrator", text: "Hidden in the chaos were matching pairs — fragments of the same memory, scattered like leaves in a storm. Find them all, and the spell breaks." },
+      { game: 1, btn: "Break the confusion spell 🃏" },
     ]
   },
-  // Chapter 2.5: After game 1
   {
-    chapter: "Chapter 2", sub: "The First Chain Falls",
+    chapter: "Chapter 2", sub: "Light in the Dark",
     beats: [
-      { scene: "✨", narrator: "Narrator", text: "CRACK! The first chain shattered into a thousand sparks of light. The confusion lifted like morning fog." },
-      { scene: "🐈‍⬛", narrator: "Obi", text: "\"You did it! I can feel the warmth again... just a little. But there are still two more chains. Keep going — please!\"" },
-      { scene: "🔒🔒", narrator: "Narrator", text: "Two locks remain. The Heartbreak Monster growled in the distance. He didn't expect anyone to actually try." },
-      { btn: "I'm not stopping 💪" },
+      { scene: "✨", narrator: "Narrator", text: "CRACK! The first chain shattered like glass, each piece dissolving into golden sparks that danced upward and disappeared into the night sky." },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"I remember now! I remember the lazy Sunday mornings, the head scratches, the sound of you two laughing at something stupid on TV. It's coming back!\"" },
+      { scene: "😈", narrator: "Heartbreak Monster", text: "\"One chain. Cute. But memories are easy. Let's see how you handle the next one...\"" },
+      { scene: "🔒🔒", narrator: "Narrator", text: "Two chains remain. But something has changed — there's a faint glow around Obi now. The darkness noticed. And it's not happy." },
+      { btn: "We keep going 💪" },
     ]
   },
-  // Chapter 3: Second Lock
   {
-    chapter: "Chapter 3", sub: "The Fading Hearts",
+    chapter: "Chapter 3", sub: "The Withered Garden",
     beats: [
-      { scene: "💔", narrator: "Narrator", text: "The second chain was made of lost love. Hearts falling from the sky like rain — fading before they touched the ground." },
-      { scene: "🐈‍⬛", narrator: "Obi", text: "\"The monster is draining all the love from the air! You need to catch it before it disappears. But be careful — the broken hearts will hurt you.\"" },
-      { scene: "💘", narrator: "Narrator", text: "Catch 20 hearts to fill Obi with enough love energy to break the second chain. Don't let the broken ones drag you down." },
-      { game: 2, btn: "Catch the love 💘" },
+      { scene: "🥀", narrator: "Narrator", text: "The second chain was made of coldness — it had frozen Obi's heart, and with it, the garden of love that once bloomed inside him." },
+      { scene: "🏚️", narrator: "Narrator", text: "Where there were once flowers of every color — memories of kisses, shared meals, inside jokes — now there was only frost and dead soil." },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"My heart feels so cold... like winter moved in and forgot to leave. But I know the flowers are still there, under the frost. They just need someone to coax them out.\"" },
+      { scene: "🌱", narrator: "Narrator", text: "Pick the flowers as they bloom. Each one you gather adds warmth back to Obi's frozen heart. Collect a full bouquet to break the second chain." },
+      { game: 2, btn: "Grow the garden back 🌸" },
     ]
   },
-  // Chapter 3.5: After game 2
   {
-    chapter: "Chapter 3", sub: "The Second Chain Falls",
+    chapter: "Chapter 3", sub: "Spring Returns",
     beats: [
-      { scene: "💖", narrator: "Narrator", text: "The second chain dissolved into rose petals. Love rushed back into the air like the first breath of spring." },
-      { scene: "🐈‍⬛", narrator: "Obi", text: "\"I can almost move! One more chain... the strongest one. The monster saved his best trick for last.\"" },
-      { scene: "😈", narrator: "Heartbreak Monster", text: "\"Impressive. But the final lock isn't broken with skill. It's broken with truth. And truth... is the hardest thing of all.\"" },
-      { btn: "I'm not afraid 💕" },
+      { scene: "🌸", narrator: "Narrator", text: "The second chain melted like ice in spring sunshine. Color rushed back into the world — pinks, golds, purples — flooding the darkness with warmth." },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"I can feel again! My heart... it's beating so fast. Like when I was a kitten and discovered boxes for the first time. That kind of joy.\"" },
+      { scene: "💐", narrator: "Narrator", text: "The flowers you picked swirled around Obi like a protective spell. Each petal carried a piece of love that the monster couldn't touch." },
+      { scene: "😈", narrator: "Heartbreak Monster", text: "\"...Fine. You want your cat? Then answer me this: do you even know what love IS? The final lock responds only to truth.\"" },
+      { btn: "I know exactly what love is ❤️" },
     ]
   },
-  // Chapter 4: Final Lock
   {
     chapter: "Chapter 4", sub: "The Truth Lock",
     beats: [
-      { scene: "🔮", narrator: "Narrator", text: "The final chain was made of doubt. It could only be broken by someone who understood what love really means." },
-      { scene: "🐈‍⬛", narrator: "Obi", text: "\"This is it. Answer from your heart — not your head. The lock can tell the difference.\"" },
-      { scene: "💌", narrator: "Narrator", text: "Five questions. Get four right. Prove that love isn't just a word — it's what you do." },
-      { game: 3, btn: "Open your heart 💌" },
+      { scene: "🔮", narrator: "Narrator", text: "The final chain was the strongest — forged from doubt itself. It whispered lies: you're not enough, love doesn't last, why even try." },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"This is the one that almost got me. The voice that says love is just a word people throw around. But I know better. I've LIVED in love. I've slept in it every night.\"" },
+      { scene: "💌", narrator: "Narrator", text: "Five questions. Answer from your heart. The lock doesn't care about being smart — it cares about being real. Get four right, and the last chain falls forever." },
+      { game: 3, btn: "Speak from the heart 💌" },
     ]
   },
-  // Chapter 5: Freedom
   {
     chapter: "Chapter 5", sub: "Freedom",
     beats: [
-      { scene: "💥", narrator: "Narrator", text: "The final chain didn't just break — it EXPLODED. Light poured out from every crack, flooding the darkness." },
-      { scene: "😈", narrator: "Heartbreak Monster", text: "\"No... NO! You can't— love isn't supposed to be this strong!\"" },
-      { scene: "☀️", narrator: "Narrator", text: "But it was. The monster shrank, smaller and smaller, until he was nothing but a whisper. And then... silence." },
-      { scene: "🐈‍⬛", narrator: "Obi", text: "\"I'm free. I'm really free! You saved me. You actually saved me!\"" },
-      { scene: "🐈‍⬛💕", narrator: "Narrator", text: "Obi stretched his little legs, shook off the last traces of the chains, and purred louder than he ever had before." },
-      { scene: "🌅", narrator: "Obi", text: "\"You know why I went out into that storm? Because I believe in you two. The love between you is real. It just needed someone to fight for it.\"" },
-      { scene: "🐈‍⬛", narrator: "Obi", text: "\"So from me — and from someone who loves you more than you know — I have a message...\"" },
+      { scene: "💥", narrator: "Narrator", text: "The final chain didn't just break — it EXPLODED. A shockwave of pure light rippled outward, turning the dark alley into something that looked like sunrise." },
+      { scene: "😈", narrator: "Heartbreak Monster", text: "\"No... NO! This wasn't supposed to— love breaks, love fades, love ENDS! That's the rule!\"" },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"No. Love stumbles. Love gets scared. Love says stupid things at 2 AM. But love doesn't end — not when someone is willing to fight for it.\"" },
+      { scene: "☀️", narrator: "Narrator", text: "The Heartbreak Monster shrank. Smaller and smaller, until he was nothing but a tiny shadow, scrambling away from the light. He'd be back someday — monsters always come back. But today, love won." },
+      { scene: "🐈‍⬛", narrator: "Narrator", text: "Obi stretched his little legs, arched his back, and shook off the last traces of the chains. His fur was glossy again. His eyes were bright. And his purr... oh, his purr could be heard three blocks away." },
+      { scene: "🏠", narrator: "Narrator", text: "He padded home through streets that seemed warmer now, jumped through the window he'd left from, and curled up right in the middle of the couch." },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"You know what I learned out there? Love isn't about being perfect. It's about showing up. Even when it's dark. Even when you're scared. Especially then.\"" },
+      { scene: "💕", narrator: "Obi", text: "\"And someone wanted me to tell you something. Something they maybe should say more often, but they mean it with every single heartbeat...\"" },
       { final: true },
     ]
   },
 ];
 
-let currentChapter = 0;
-let currentBeat = 0;
-let isTyping = false;
-let typeTimeout = null;
-let fullText = '';
+let currentChapter = 0, currentBeat = 0, isTyping = false, typeTimeout = null;
+let pickedFlowers = [];
 
-function initStory() {
-  renderChapterDots();
-  showBeat();
-}
+function initStory() { renderDots(); showBeat(); }
 
-function renderChapterDots() {
-  const dots = document.getElementById('chapterDots');
-  dots.innerHTML = '';
+function renderDots() {
+  const d = document.getElementById('chapterDots'); d.innerHTML = '';
   for (let i = 0; i < story.length; i++) {
-    const d = document.createElement('div');
-    d.className = 'ch-dot' + (i < currentChapter ? ' done' : '') + (i === currentChapter ? ' active' : '');
-    dots.appendChild(d);
+    const dot = document.createElement('div');
+    dot.className = 'ch-dot' + (i < currentChapter ? ' done' : '') + (i === currentChapter ? ' active' : '');
+    d.appendChild(dot);
   }
 }
 
-function fadeTransition(cb) {
-  const ov = document.getElementById('fadeOverlay');
-  ov.classList.add('active');
-  setTimeout(() => { cb(); setTimeout(() => ov.classList.remove('active'), 100); }, 600);
+function fade(cb) {
+  const o = document.getElementById('fadeOverlay');
+  o.classList.add('active');
+  setTimeout(() => { cb(); setTimeout(() => o.classList.remove('active'), 100); }, 600);
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
 
 function showBeat() {
@@ -440,21 +461,27 @@ function showBeat() {
 
   document.getElementById('chTitle').textContent = ch.chapter;
   document.getElementById('chSub').textContent = ch.sub;
-  renderChapterDots();
+  renderDots();
 
   const btn = document.getElementById('continueBtn');
   btn.classList.remove('visible');
 
-  // Final beat → go to win
   if (beat.final) {
-    fadeTransition(() => {
+    fade(() => {
       showScreen('win');
+      // Show picked flowers in prize
+      const pb = document.getElementById('prizeBouquet');
+      pb.innerHTML = '';
+      pickedFlowers.forEach(f => {
+        const s = document.createElement('span');
+        s.textContent = f;
+        pb.appendChild(s);
+      });
       rainHearts();
     });
     return;
   }
 
-  // Game launch beat
   if (beat.game) {
     document.getElementById('storyScene').textContent = '';
     document.getElementById('storyNarrator').textContent = '';
@@ -462,27 +489,25 @@ function showBeat() {
     btn.textContent = beat.btn;
     btn.classList.add('visible');
     btn.onclick = () => {
-      fadeTransition(() => {
+      fade(() => {
         showScreen('game' + beat.game);
         if (beat.game === 1) initMemory();
-        if (beat.game === 2) initCatch();
+        if (beat.game === 2) initGarden();
         if (beat.game === 3) initQuiz();
       });
     };
     return;
   }
 
-  // Regular story beat
   if (beat.scene) document.getElementById('storyScene').textContent = beat.scene;
-  if (beat.narrator) document.getElementById('storyNarrator').textContent = beat.narrator === 'Narrator' ? '📖 Narrator' : beat.narrator === 'Obi' ? '🐈‍⬛ Obi' : '😈 ' + beat.narrator;
+  document.getElementById('storyNarrator').textContent =
+    beat.narrator === 'Narrator' ? '📖 Narrator' :
+    beat.narrator === 'Obi' ? '🐈‍⬛ Obi' :
+    '😈 ' + beat.narrator;
 
   if (beat.text) {
     typeText(beat.text, () => {
-      if (beat.btn) {
-        btn.textContent = beat.btn;
-      } else {
-        btn.textContent = 'Continue ✨';
-      }
+      btn.textContent = beat.btn || 'Continue ✨';
       btn.classList.add('visible');
       btn.onclick = () => nextBeat();
     });
@@ -497,34 +522,26 @@ function showBeat() {
 function typeText(text, onDone) {
   const el = document.getElementById('storyText');
   el.innerHTML = '<span class="cursor"></span>';
-  fullText = text;
   isTyping = true;
   let i = 0;
-
   function tick() {
     if (i < text.length) {
       el.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
       i++;
-      const delay = text[i-1] === '.' || text[i-1] === '!' || text[i-1] === '?' ? 80 :
-                    text[i-1] === ',' ? 50 : text[i-1] === '"' ? 30 : 25;
+      const ch = text[i-1];
+      const delay = '.!?'.includes(ch) ? 80 : ch === ',' ? 50 : ch === '"' ? 30 : ch === '—' ? 60 : 22;
       typeTimeout = setTimeout(tick, delay);
     } else {
-      isTyping = false;
-      el.innerHTML = text;
+      isTyping = false; el.innerHTML = text;
       if (onDone) onDone();
     }
   }
-
-  // Tap to skip typewriter
   el.onclick = () => {
     if (isTyping) {
-      clearTimeout(typeTimeout);
-      isTyping = false;
-      el.innerHTML = text;
-      if (onDone) onDone();
+      clearTimeout(typeTimeout); isTyping = false;
+      el.innerHTML = text; if (onDone) onDone();
     }
   };
-
   tick();
 }
 
@@ -532,43 +549,32 @@ function nextBeat() {
   const ch = story[currentChapter];
   currentBeat++;
   if (currentBeat >= ch.beats.length) {
-    currentChapter++;
-    currentBeat = 0;
+    currentChapter++; currentBeat = 0;
     if (currentChapter >= story.length) return;
-    fadeTransition(() => showBeat());
-  } else {
-    showBeat();
-  }
+    fade(() => showBeat());
+  } else { showBeat(); }
 }
 
-function gameComplete(n) {
-  fadeTransition(() => {
+function gameComplete() {
+  fade(() => {
     showScreen('storyScreen');
-    currentChapter++;
-    currentBeat = 0;
+    currentChapter++; currentBeat = 0;
     showBeat();
   });
 }
 
-// ==================== SCREENS ====================
-
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-
 // ==================== GAME 1: MEMORY ====================
-const emojis = ['💕','💖','💗','💓','💘','💝','🌹','💌'];
+const emojiSet = ['💕','💖','💗','💓','💘','💝','🌹','💌'];
 let memFlipped=[], memMatched=0, memMoves=0, memLocked=false;
 
 function initMemory() {
   memMatched=0; memMoves=0; memFlipped=[]; memLocked=false;
   document.getElementById('moves').textContent='0';
   document.getElementById('pairs').textContent='0';
-  const deck=[...emojis,...emojis];
+  const deck=[...emojiSet,...emojiSet];
   for(let i=deck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[deck[i],deck[j]]=[deck[j],deck[i]];}
   const board=document.getElementById('gameBoard'); board.innerHTML='';
-  deck.forEach((e) => {
+  deck.forEach(e => {
     const c=document.createElement('div'); c.className='card';
     c.innerHTML=`<span class="card-back">🐾</span><span class="card-front">${e}</span>`;
     c.dataset.emoji=e;
@@ -588,7 +594,7 @@ function flipCard(card) {
         memFlipped[0].classList.add('matched'); memFlipped[1].classList.add('matched');
         memMatched++; document.getElementById('pairs').textContent=memMatched;
         memFlipped=[]; memLocked=false;
-        if(memMatched===8) setTimeout(()=>gameComplete(1),800);
+        if(memMatched===8) setTimeout(()=>gameComplete(),800);
       },500);
     } else {
       setTimeout(()=>{
@@ -599,74 +605,115 @@ function flipCard(card) {
   }
 }
 
-// ==================== GAME 2: CATCH ====================
-let catchInterval, catchLives, catchCount, catchActive=false;
+// ==================== GAME 2: FLOWER GARDEN ====================
+const flowers = ['🌸','🌺','🌻','🌹','🌷','💮','🌼','🏵️','💐','🪻','🪷','🌾'];
+const grassEmojis = ['🌱','🍃','☘️'];
+let gardenCount = 0;
+let gardenSlots = [];
+let gardenTimer = null;
 
-function initCatch() {
-  catchLives=3; catchCount=0; catchActive=true;
-  document.getElementById('catchLives').textContent='❤️❤️❤️';
-  document.getElementById('catchCount').textContent='0/20';
-  document.getElementById('catchProgress').style.width='0%';
-  const area=document.getElementById('catchArea');
-  area.querySelectorAll('.falling-item').forEach(e=>e.remove());
-  const basket=document.getElementById('basket');
-  basket.style.left = (area.offsetWidth/2 - 35)+'px';
-  area.onmousemove = (e) => { if(!catchActive) return; moveBasket(e.clientX, area); };
-  area.ontouchmove = (e) => { if(!catchActive) return; e.preventDefault(); moveBasket(e.touches[0].clientX, area); };
-  if(catchInterval) clearInterval(catchInterval);
-  catchInterval = setInterval(() => { if(catchActive) spawnItem(area); }, 700);
+function initGarden() {
+  gardenCount = 0;
+  pickedFlowers = [];
+  document.getElementById('bouquet').innerHTML = '';
+  document.getElementById('gardenProg').textContent = 'Pick 12 flowers for Obi\'s freedom bouquet! 💐  (0/12)';
+  const garden = document.getElementById('garden');
+  garden.innerHTML = '';
+  gardenSlots = [];
+
+  // Create 20 spots (4 rows x 5)
+  for (let i = 0; i < 20; i++) {
+    const spot = document.createElement('div');
+    spot.className = 'garden-spot empty';
+    spot.textContent = grassEmojis[Math.floor(Math.random() * grassEmojis.length)];
+    spot.dataset.index = i;
+    garden.appendChild(spot);
+    gardenSlots.push({ el: spot, hasFlower: false });
+  }
+
+  // Start blooming
+  bloomRandom();
+  gardenTimer = setInterval(bloomRandom, 1200);
 }
 
-function moveBasket(clientX, area) {
-  const rect = area.getBoundingClientRect();
-  let x = clientX - rect.left - 35;
-  document.getElementById('basket').style.left = Math.max(0, Math.min(x, area.offsetWidth-70))+'px';
+function bloomRandom() {
+  if (gardenCount >= 12) return;
+  // Count current blooming flowers
+  const blooming = gardenSlots.filter(s => s.hasFlower).length;
+  if (blooming >= 5) return; // max 5 flowers at once
+
+  // Find empty spots
+  const empty = gardenSlots.filter(s => !s.hasFlower);
+  if (empty.length === 0) return;
+
+  // Bloom 1-2 flowers
+  const count = Math.min(1 + Math.floor(Math.random() * 2), empty.length);
+  for (let i = 0; i < count; i++) {
+    const idx = Math.floor(Math.random() * empty.length);
+    const slot = empty.splice(idx, 1)[0];
+    const flower = flowers[Math.floor(Math.random() * flowers.length)];
+    slot.hasFlower = true;
+    slot.el.className = 'garden-spot blooming';
+    slot.el.textContent = flower;
+    slot.el.onclick = () => pickFlower(slot, flower);
+
+    // Wilt after 4 seconds if not picked
+    slot.wiltTimer = setTimeout(() => {
+      if (slot.hasFlower) {
+        slot.hasFlower = false;
+        slot.el.className = 'garden-spot empty';
+        slot.el.textContent = grassEmojis[Math.floor(Math.random() * grassEmojis.length)];
+        slot.el.onclick = null;
+      }
+    }, 4000);
+  }
 }
 
-function spawnItem(area) {
-  const isGood = Math.random() > 0.25;
-  const goods = ['💕','💖','💗','💝','💘','❤️','🌹'];
-  const bads = ['💔','🖤','👻'];
-  const item = document.createElement('div');
-  item.className = 'falling-item';
-  item.textContent = isGood ? goods[Math.floor(Math.random()*goods.length)] : bads[Math.floor(Math.random()*bads.length)];
-  item.dataset.good = isGood ? '1' : '0';
-  item.style.left = (Math.random()*(area.offsetWidth-40))+'px';
-  item.style.top = '-40px';
-  area.appendChild(item);
-  let y = -40;
-  const speed = 2 + Math.random()*2;
-  (function fall() {
-    if(!catchActive) { item.remove(); return; }
-    y += speed; item.style.top = y+'px';
-    const bx = parseFloat(document.getElementById('basket').style.left);
-    const ix = parseFloat(item.style.left);
-    if(y > area.offsetHeight-60 && y < area.offsetHeight-20 && Math.abs(ix-bx)<55) {
-      item.remove();
-      if(item.dataset.good==='1') {
-        catchCount++;
-        document.getElementById('catchCount').textContent=catchCount+'/20';
-        document.getElementById('catchProgress').style.width=(catchCount/20*100)+'%';
-        if(catchCount>=20) { endCatch(); setTimeout(()=>gameComplete(2),500); }
-      } else { catchLives--; updLives(); if(catchLives<=0){endCatch();initCatch();} }
-      return;
-    }
-    if(y>area.offsetHeight) {
-      item.remove();
-      if(item.dataset.good==='1') { catchLives--; updLives(); if(catchLives<=0){endCatch();initCatch();} }
-      return;
-    }
-    requestAnimationFrame(fall);
-  })();
-}
+function pickFlower(slot, flower) {
+  if (!slot.hasFlower || gardenCount >= 12) return;
+  slot.hasFlower = false;
+  clearTimeout(slot.wiltTimer);
 
-function updLives() {
-  document.getElementById('catchLives').textContent='❤️'.repeat(Math.max(0,catchLives))+'🤍'.repeat(Math.max(0,3-catchLives));
-}
-function endCatch() {
-  catchActive=false;
-  if(catchInterval)clearInterval(catchInterval);
-  document.getElementById('catchArea').querySelectorAll('.falling-item').forEach(e=>e.remove());
+  // Sparkle burst
+  for (let i = 0; i < 5; i++) {
+    const sp = document.createElement('div');
+    sp.className = 'sparkle-burst';
+    sp.textContent = '✨';
+    sp.style.setProperty('--tx', (Math.random()-0.5)*80+'px');
+    sp.style.setProperty('--ty', (Math.random()-0.5)*80+'px');
+    slot.el.appendChild(sp);
+    setTimeout(() => sp.remove(), 600);
+  }
+
+  slot.el.className = 'garden-spot picked';
+  setTimeout(() => {
+    slot.el.className = 'garden-spot empty';
+    slot.el.textContent = grassEmojis[Math.floor(Math.random() * grassEmojis.length)];
+    slot.el.onclick = null;
+  }, 400);
+
+  // Add to bouquet
+  gardenCount++;
+  pickedFlowers.push(flower);
+  const b = document.createElement('div');
+  b.className = 'bouquet-flower';
+  b.textContent = flower;
+  document.getElementById('bouquet').appendChild(b);
+  document.getElementById('gardenProg').textContent = `Pick 12 flowers for Obi's freedom bouquet! 💐  (${gardenCount}/12)`;
+
+  if (gardenCount >= 12) {
+    clearInterval(gardenTimer);
+    // Clear remaining flowers
+    gardenSlots.forEach(s => {
+      if (s.hasFlower) {
+        s.hasFlower = false;
+        s.el.className = 'garden-spot empty';
+        s.el.textContent = '✨';
+      }
+    });
+    document.getElementById('gardenProg').textContent = '💐 Beautiful bouquet complete! 💐';
+    setTimeout(() => gameComplete(), 1200);
+  }
 }
 
 // ==================== GAME 3: QUIZ ====================
@@ -675,6 +722,7 @@ const quizData = [
   { q: "When she says 'I'm fine', she means...", opts: ["She's totally fine ✅","She is NOT fine, go fix it NOW 🚨","Time to play video games 🎮","Ask again in 3 hours ⏰"], correct: 1 },
   { q: "The best gift for your girl is...", opts: ["Gift card 💳","Your time and attention 💕","A meme 😂","Literally anything from Shein 📦"], correct: 1 },
   { q: "How do you win an argument?", opts: ["Raise your voice louder 📢","Present a PowerPoint 📊","You don't — you hug her 🤗","Google 'how to win argument with gf'"], correct: 2 },
+  { q: "What makes a relationship last?", opts: ["Being right all the time 🏆","Trust, patience & effort 💛","Matching outfits 👫","Having the Wi-Fi password 📶"], correct: 1 },
   { q: "What would Obi say about love?", opts: ["Meow 🐱","Love is warm like a sunspot 🌞","Knock things off tables as a love language 😼","All of the above 🐈‍⬛"], correct: 3 },
 ];
 let quizIdx=0, quizScore=0;
@@ -683,7 +731,7 @@ function initQuiz() { quizIdx=0; quizScore=0; showQ(); }
 
 function showQ() {
   if(quizIdx>=quizData.length) {
-    if(quizScore>=4) setTimeout(()=>gameComplete(3),500);
+    if(quizScore>=4) setTimeout(()=>gameComplete(),500);
     else { quizIdx=0; quizScore=0; showQ(); }
     return;
   }
@@ -709,8 +757,8 @@ function showQ() {
 // ==================== EFFECTS ====================
 function rainHearts() {
   const c=document.getElementById('heartRain'); c.innerHTML='';
-  const h=['💕','💖','💗','💓','💝','💘','❤️','🌹','✨','🐈‍⬛','🐾'];
-  for(let i=0;i<60;i++){
+  const h=['💕','💖','💗','💓','💝','💘','❤️','🌹','✨','🐈‍⬛','🐾','🌸','🌺'];
+  for(let i=0;i<70;i++){
     setTimeout(()=>{
       const d=document.createElement('div'); d.className='rain-heart';
       d.textContent=h[Math.floor(Math.random()*h.length)];
@@ -718,13 +766,13 @@ function rainHearts() {
       d.style.fontSize=(20+Math.random()*30)+'px';
       d.style.animationDuration=(2+Math.random()*3)+'s';
       c.appendChild(d); setTimeout(()=>d.remove(),5000);
-    },i*80);
+    },i*70);
   }
 }
 
 (function(){
   const c=document.getElementById('bgHearts');
-  const h=['💕','💖','💗','🐾','✨','🌸'];
+  const h=['💕','💖','🐾','✨','🌸','🌹'];
   for(let i=0;i<20;i++){
     const d=document.createElement('div'); d.className='bg-heart';
     d.textContent=h[Math.floor(Math.random()*h.length)];
@@ -737,17 +785,16 @@ function rainHearts() {
 })();
 
 document.addEventListener('click',e=>{
-  const sp=['✨','💖','🐾'];
-  for(let i=0;i<2;i++){
+  const sp=['✨','💖','🐾','💕'];
+  for(let i=0;i<3;i++){
     const s=document.createElement('div'); s.className='sparkle';
     s.textContent=sp[Math.floor(Math.random()*sp.length)];
-    s.style.left=(e.clientX+(Math.random()-0.5)*50)+'px';
-    s.style.top=(e.clientY+(Math.random()-0.5)*50)+'px';
+    s.style.left=(e.clientX+(Math.random()-0.5)*60)+'px';
+    s.style.top=(e.clientY+(Math.random()-0.5)*60)+'px';
     document.body.appendChild(s); setTimeout(()=>s.remove(),1000);
   }
 });
 
-// Start
 initStory();
 </script>
 </body>
