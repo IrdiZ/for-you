@@ -281,6 +281,18 @@ body {
 </head>
 <body>
 
+<!-- Music toggle -->
+<button id="musicBtn" onclick="toggleMusic()" style="
+  position: fixed; top: 15px; right: 15px; z-index: 900;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  color: #fff; width: 44px; height: 44px; border-radius: 50%;
+  font-size: 20px; cursor: pointer; backdrop-filter: blur(10px);
+  transition: all 0.3s; display: flex; align-items: center; justify-content: center;
+">🔇</button>
+<audio id="bgMusic" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
 <div class="bg-hearts" id="bgHearts"></div>
 <div class="fade-overlay" id="fadeOverlay"></div>
 
@@ -351,15 +363,15 @@ const story = [
     chapter: "Chapter 1", sub: "The Beginning",
     beats: [
       { scene: "🌙", narrator: "Narrator", text: "Once upon a time, in a cozy little apartment filled with warm light and the smell of coffee, there lived a black cat named Obi." },
-      { scene: "🐈‍⬛", narrator: "Narrator", text: "Obi — short for Obsidian — had fur as dark as midnight, golden eyes like tiny suns, and a purr so deep it could make the whole couch vibrate." },
+      { scene: "🐈‍⬛", narrator: "Narrator", text: "Obi... short for Obsidian... had fur as dark as midnight, golden eyes like tiny suns, and a purr so deep it could make the whole couch vibrate." },
       { scene: "💕", narrator: "Narrator", text: "He belonged to two people who loved each other very much. He'd curl up between them at night, one paw on each, like a little furry bridge connecting their hearts." },
       { scene: "⛈️", narrator: "Narrator", text: "But even the strongest love has storms. One evening, the air changed. Words that shouldn't have been said echoed through the rooms. Doors closed. Silence crept in like fog." },
-      { scene: "🐈‍⬛", narrator: "Obi", text: "\"I felt it before they did. The warmth between them — the thing I slept on every night — it was flickering. Like a candle in a draft.\"" },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"I felt it before they did. The warmth between them... the thing I slept on every night... it was flickering. Like a candle in a draft.\"" },
       { scene: "🌃", narrator: "Narrator", text: "While his humans sat in separate rooms, Obi made a decision. He slipped through the cracked window, padded across the moonlit rooftop, and disappeared into the night." },
       { scene: "🐈‍⬛", narrator: "Obi", text: "\"I had to find it. The warmth. If it wasn't inside anymore, maybe I could bring it back from outside. Cats always find what they're looking for... right?\"" },
       { scene: "🌑", narrator: "Narrator", text: "But the city at night is a different world. The streets twisted. The shadows grew longer. And somewhere in the darkest alley, something was waiting." },
       { scene: "😈", narrator: "Heartbreak Monster", text: "\"Well, well... a little black cat, wandering alone. Looking for love? How... delicious. Let me show you what happens to love in MY world.\"" },
-      { scene: "⛓️", narrator: "Narrator", text: "Three chains erupted from the darkness. One wrapped around Obi's mind — confusion. One around his heart — coldness. One around his soul — doubt. Three locks clicked shut." },
+      { scene: "⛓️", narrator: "Narrator", text: "Three chains erupted from the darkness. One wrapped around Obi's mind... confusion. One around his heart... coldness. One around his soul... doubt. Three locks clicked shut." },
       { scene: "🐈‍⬛", narrator: "Obi", text: "\"I can't move... I can't think... everything is getting so cold. Please... if anyone can hear me... I went out there for love. Don't let it end like this.\"" },
       { btn: "I'll save you, Obi 🐾" },
     ]
@@ -367,9 +379,9 @@ const story = [
   {
     chapter: "Chapter 2", sub: "The Confusion Spell",
     beats: [
-      { scene: "🌫️", narrator: "Narrator", text: "The first chain was woven from confusion — every happy memory Obi ever had was scrambled, turned inside out, made unrecognizable." },
+      { scene: "🌫️", narrator: "Narrator", text: "The first chain was woven from confusion... every happy memory Obi ever had was scrambled, turned inside out, made unrecognizable." },
       { scene: "🐈‍⬛", narrator: "Obi", text: "\"Everything is mixed up... I remember the sound of laughter but I can't remember whose. I remember the warmth but not where it came from. Please... put the pieces back together.\"" },
-      { scene: "🧩", narrator: "Narrator", text: "Hidden in the chaos were matching pairs — fragments of the same memory, scattered like leaves in a storm. Find them all, and the spell breaks." },
+      { scene: "🧩", narrator: "Narrator", text: "Hidden in the chaos were matching pairs... fragments of the same memory, scattered like leaves in a storm. Find them all, and the spell breaks." },
       { game: 1, btn: "Break the confusion spell 🃏" },
     ]
   },
@@ -379,15 +391,15 @@ const story = [
       { scene: "✨", narrator: "Narrator", text: "CRACK! The first chain shattered like glass, each piece dissolving into golden sparks that danced upward and disappeared into the night sky." },
       { scene: "🐈‍⬛", narrator: "Obi", text: "\"I remember now! I remember the lazy Sunday mornings, the head scratches, the sound of you two laughing at something stupid on TV. It's coming back!\"" },
       { scene: "😈", narrator: "Heartbreak Monster", text: "\"One chain. Cute. But memories are easy. Let's see how you handle the next one...\"" },
-      { scene: "🔒🔒", narrator: "Narrator", text: "Two chains remain. But something has changed — there's a faint glow around Obi now. The darkness noticed. And it's not happy." },
+      { scene: "🔒🔒", narrator: "Narrator", text: "Two chains remain. But something has changed... there's a faint glow around Obi now. The darkness noticed. And it's not happy." },
       { btn: "We keep going 💪" },
     ]
   },
   {
     chapter: "Chapter 3", sub: "The Withered Garden",
     beats: [
-      { scene: "🥀", narrator: "Narrator", text: "The second chain was made of coldness — it had frozen Obi's heart, and with it, the garden of love that once bloomed inside him." },
-      { scene: "🏚️", narrator: "Narrator", text: "Where there were once flowers of every color — memories of kisses, shared meals, inside jokes — now there was only frost and dead soil." },
+      { scene: "🥀", narrator: "Narrator", text: "The second chain was made of coldness... it had frozen Obi's heart, and with it, the garden of love that once bloomed inside him." },
+      { scene: "🏚️", narrator: "Narrator", text: "Where there were once flowers of every color... memories of kisses, shared meals, inside jokes... now there was only frost and dead soil." },
       { scene: "🐈‍⬛", narrator: "Obi", text: "\"My heart feels so cold... like winter moved in and forgot to leave. But I know the flowers are still there, under the frost. They just need someone to coax them out.\"" },
       { scene: "🌱", narrator: "Narrator", text: "Pick the flowers as they bloom. Each one you gather adds warmth back to Obi's frozen heart. Collect a full bouquet to break the second chain." },
       { game: 2, btn: "Grow the garden back 🌸" },
@@ -396,7 +408,7 @@ const story = [
   {
     chapter: "Chapter 3", sub: "Spring Returns",
     beats: [
-      { scene: "🌸", narrator: "Narrator", text: "The second chain melted like ice in spring sunshine. Color rushed back into the world — pinks, golds, purples — flooding the darkness with warmth." },
+      { scene: "🌸", narrator: "Narrator", text: "The second chain melted like ice in spring sunshine. Color rushed back into the world... pinks, golds, purples... flooding the darkness with warmth." },
       { scene: "🐈‍⬛", narrator: "Obi", text: "\"I can feel again! My heart... it's beating so fast. Like when I was a kitten and discovered boxes for the first time. That kind of joy.\"" },
       { scene: "💐", narrator: "Narrator", text: "The flowers you picked swirled around Obi like a protective spell. Each petal carried a piece of love that the monster couldn't touch." },
       { scene: "😈", narrator: "Heartbreak Monster", text: "\"...Fine. You want your cat? Then answer me this: do you even know what love IS? The final lock responds only to truth.\"" },
@@ -406,19 +418,19 @@ const story = [
   {
     chapter: "Chapter 4", sub: "The Truth Lock",
     beats: [
-      { scene: "🔮", narrator: "Narrator", text: "The final chain was the strongest — forged from doubt itself. It whispered lies: you're not enough, love doesn't last, why even try." },
+      { scene: "🔮", narrator: "Narrator", text: "The final chain was the strongest... forged from doubt itself. It whispered lies: you're not enough, love doesn't last, why even try." },
       { scene: "🐈‍⬛", narrator: "Obi", text: "\"This is the one that almost got me. The voice that says love is just a word people throw around. But I know better. I've LIVED in love. I've slept in it every night.\"" },
-      { scene: "💌", narrator: "Narrator", text: "Five questions. Answer from your heart. The lock doesn't care about being smart — it cares about being real. Get four right, and the last chain falls forever." },
+      { scene: "💌", narrator: "Narrator", text: "Five questions. Answer from your heart. The lock doesn't care about being smart... it cares about being real. Get four right, and the last chain falls forever." },
       { game: 3, btn: "Speak from the heart 💌" },
     ]
   },
   {
     chapter: "Chapter 5", sub: "Freedom",
     beats: [
-      { scene: "💥", narrator: "Narrator", text: "The final chain didn't just break — it EXPLODED. A shockwave of pure light rippled outward, turning the dark alley into something that looked like sunrise." },
-      { scene: "😈", narrator: "Heartbreak Monster", text: "\"No... NO! This wasn't supposed to— love breaks, love fades, love ENDS! That's the rule!\"" },
-      { scene: "🐈‍⬛", narrator: "Obi", text: "\"No. Love stumbles. Love gets scared. Love says stupid things at 2 AM. But love doesn't end — not when someone is willing to fight for it.\"" },
-      { scene: "☀️", narrator: "Narrator", text: "The Heartbreak Monster shrank. Smaller and smaller, until he was nothing but a tiny shadow, scrambling away from the light. He'd be back someday — monsters always come back. But today, love won." },
+      { scene: "💥", narrator: "Narrator", text: "The final chain didn't just break... it EXPLODED. A shockwave of pure light rippled outward, turning the dark alley into something that looked like sunrise." },
+      { scene: "😈", narrator: "Heartbreak Monster", text: "\"No... NO! This wasn't supposed to...  love breaks, love fades, love ENDS! That's the rule!\"" },
+      { scene: "🐈‍⬛", narrator: "Obi", text: "\"No. Love stumbles. Love gets scared. Love says stupid things at 2 AM. But love doesn't end... not when someone is willing to fight for it.\"" },
+      { scene: "☀️", narrator: "Narrator", text: "The Heartbreak Monster shrank. Smaller and smaller, until he was nothing but a tiny shadow, scrambling away from the light. He'd be back someday... monsters always come back. But today, love won." },
       { scene: "🐈‍⬛", narrator: "Narrator", text: "Obi stretched his little legs, arched his back, and shook off the last traces of the chains. His fur was glossy again. His eyes were bright. And his purr... oh, his purr could be heard three blocks away." },
       { scene: "🏠", narrator: "Narrator", text: "He padded home through streets that seemed warmer now, jumped through the window he'd left from, and curled up right in the middle of the couch." },
       { scene: "🐈‍⬛", narrator: "Obi", text: "\"You know what I learned out there? Love isn't about being perfect. It's about showing up. Even when it's dark. Even when you're scared. Especially then.\"" },
@@ -529,7 +541,7 @@ function typeText(text, onDone) {
       el.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
       i++;
       const ch = text[i-1];
-      const delay = '.!?'.includes(ch) ? 80 : ch === ',' ? 50 : ch === '"' ? 30 : ch === '—' ? 60 : 22;
+      const delay = '.!?'.includes(ch) ? 80 : ch === ',' ? 50 : ch === '"' ? 30 : 22;
       typeTimeout = setTimeout(tick, delay);
     } else {
       isTyping = false; el.innerHTML = text;
@@ -721,7 +733,7 @@ const quizData = [
   { q: "What's the best way to say sorry?", opts: ["Text 'my bad' 💀","Buy flowers and say it in person 💐","Blame the dog 🐕","Build her a whole website 🔥"], correct: 3 },
   { q: "When she says 'I'm fine', she means...", opts: ["She's totally fine ✅","She is NOT fine, go fix it NOW 🚨","Time to play video games 🎮","Ask again in 3 hours ⏰"], correct: 1 },
   { q: "The best gift for your girl is...", opts: ["Gift card 💳","Your time and attention 💕","A meme 😂","Literally anything from Shein 📦"], correct: 1 },
-  { q: "How do you win an argument?", opts: ["Raise your voice louder 📢","Present a PowerPoint 📊","You don't — you hug her 🤗","Google 'how to win argument with gf'"], correct: 2 },
+  { q: "How do you win an argument?", opts: ["Raise your voice louder 📢","Present a PowerPoint 📊","You don't... you hug her 🤗","Google 'how to win argument with gf'"], correct: 2 },
   { q: "What makes a relationship last?", opts: ["Being right all the time 🏆","Trust, patience & effort 💛","Matching outfits 👫","Having the Wi-Fi password 📶"], correct: 1 },
   { q: "What would Obi say about love?", opts: ["Meow 🐱","Love is warm like a sunspot 🌞","Knock things off tables as a love language 😼","All of the above 🐈‍⬛"], correct: 3 },
 ];
@@ -794,6 +806,23 @@ document.addEventListener('click',e=>{
     document.body.appendChild(s); setTimeout(()=>s.remove(),1000);
   }
 });
+
+// Music
+let musicPlaying = false;
+function toggleMusic() {
+  const audio = document.getElementById('bgMusic');
+  const btn = document.getElementById('musicBtn');
+  if (musicPlaying) {
+    audio.pause();
+    btn.textContent = '🔇';
+    musicPlaying = false;
+  } else {
+    audio.volume = 0.35;
+    audio.play().catch(() => {});
+    btn.textContent = '🎵';
+    musicPlaying = true;
+  }
+}
 
 initStory();
 </script>
